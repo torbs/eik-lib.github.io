@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'eik-lib', // Usually your GitHub org/user name.
-  projectName: 'eik', // Usually your repo name.
+  projectName: 'eik-lib.github.io', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'My Site',
