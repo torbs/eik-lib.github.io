@@ -28,5 +28,5 @@ jobs:
         npm run deploy
       env:
         CI: true
-        USE_SSH: true
+        # USE_SSH: true
         GIT_USER: trygve-lie
