@@ -8,9 +8,9 @@ module.exports = {
   projectName: 'eik-lib.github.io', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'Eik',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Eik Logo',
         src: 'img/logo.svg',
       },
       links: [

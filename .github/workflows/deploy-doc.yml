@@ -1,7 +1,5 @@
 name: Deploy documentation
 
-# Only trigger on:
-# - source branch
 on:
   push:
     branches:
@@ -28,5 +26,4 @@ jobs:
         npm run deploy
       env:
         CI: true
-        # USE_SSH: true
         GIT_USER: trygve-lie
