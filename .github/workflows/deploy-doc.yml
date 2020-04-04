@@ -21,7 +21,11 @@ jobs:
     - name: npm install
       run: npm install
     - name: npm run deploy
-      run: npm run deploy
+      run: |
+        git config --global user.email "trygve-lie@users.noreply.github.com"
+        git config --global user.name "trygve-lie"
+        echo "machine github.com login trygve-lie password ${{ secrets.GIT_TOKEN }}" > ~/.netrc
+        npm run deploy
       env:
         CI: true
         USE_SSH: true
