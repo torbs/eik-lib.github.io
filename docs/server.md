@@ -1,7 +1,5 @@
 ---
-id: server_main
+id: server
 title: Server
 sidebar_label: Server
 ---
-
-# @eik/server
