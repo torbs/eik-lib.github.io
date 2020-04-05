@@ -3,6 +3,10 @@ module.exports = {
   someSidebar: {
     Overview: ['overview_main'],
     Client: ['client_main'],
-    Server: ['server_main'],
+    Server: [
+      'server_main',
+      'server_rest_api',
+      'server_file_structure'
+    ],
   },
 };
