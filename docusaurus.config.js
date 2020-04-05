@@ -17,12 +17,12 @@ module.exports = {
         {
           to: 'docs/overview',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'Documentation',
           position: 'left',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/eik-lib/',
+          href: 'https://github.com/eik-lib',
           label: 'GitHub',
           position: 'right',
         },
@@ -30,47 +30,6 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Style Guide',
-              to: 'docs/doc1',
-            },
-            {
-              label: 'Second Doc',
-              to: 'docs/doc2',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'Social',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/eik-lib',
-            }
-          ],
-        },
-      ],
       copyright: `Copyright © ${new Date().getFullYear()} - FINN.no.`,
     },
   },
