@@ -6,6 +6,49 @@ sidebar_label: REST API
 
 The EIK server has the following REST API:
 
+## Authentication
+
+Authentication is needed to execute multiple API calls in the REST API.
+
+### Endpoint Summary Table
+
+| Name                         | Verb | Endpoint                   | Form Fields |
+| ---------------------------- | ---- | -------------------------- | ----------- |
+| [Login](#login)              | POST  | `/:org/auth/login`        | `key`       |
+
+### Login
+
+**Method:** `POST`
+
+Logs a user in to the service.
+
+```bash
+https://:assetServerUrl:port/:org/auth/login
+```
+
+Form parameters:
+
+-   `key` an authentication key
+
+Status codes:
+
+-   `200` if user is authorized
+-   `401` if user is not authorized
+
+Success response: A jwt token
+
+```json
+{
+    "token": "..."
+}
+```
+
+Example:
+
+```bash
+curl -X POST -i -F key=rfm940c3 http://localhost:4001/finn/auth/login
+```
+
 ## Packages
 
 Modules are packages of files to be loaded by a browser. Modules are versioned and consist of one or more files. A module are immutable.
@@ -15,7 +58,7 @@ Modules are packages of files to be loaded by a browser. Modules are versioned a
 | Name                                      | Verb | Endpoint                           | Form Fields |
 | ----------------------------------------- | ---- | ---------------------------------- | ----------- |
 | [Public Package URL](#public-package-url) | GET  | `/:org/pkg/:name/:version/:extras` |             |
-| [Upload a Package](#upload-a-package)     | PUT  | `/:org/pkg/:name/:version`         | `filedata`  |
+| [Upload a Package](#upload-a-package)     | PUT  | `/:org/pkg/:name/:version`         | `package`   |
 
 ### Public Package URL
 
@@ -63,7 +106,11 @@ URL parameters:
 
 Form parameters:
 
--   `:package` a `tar` or `tar.gz` containing the package
+-   `package` a `tar` or `tar.gz` containing the files of the package
+
+HTTP headers:
+
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
@@ -77,7 +124,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X PUT -i -F filedata=@archive.tgz http://localhost:4001/finn/pkg/fuzz/8.4.1
+curl -X PUT -i -F package=@archive.tgz -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/8.4.1
 ```
 
 ### Latest Package versions
@@ -190,7 +237,11 @@ URL parameters:
 
 Form parameters:
 
--   `:map` a `json` containing the import map
+-   `map` a `json` file (the import map)
+
+HTTP headers:
+
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
@@ -204,7 +255,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X PUT -i -F map=@import-map.json http://localhost:4001/finn/map/buzz/8.4.1
+curl -X PUT -i -F map=@import-map.json -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/8.4.1
 ```
 
 ### Latest Import Map versions
@@ -298,6 +349,10 @@ Form parameters:
 
 -   `:version` full version of the package to be aliased
 
+HTTP headers:
+
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
+
 Status codes:
 
 -   `303` if alias is successfully created. `location` points to the alias
@@ -309,8 +364,8 @@ Status codes:
 Example:
 
 ```bash
-curl -X PUT -i -F version=8.4.1 http://localhost:4001/finn/pkg/fuzz/v8
-curl -X PUT -i -F version=4.2.2 http://localhost:4001/finn/map/buzz/v4
+curl -X PUT -i -F version=8.4.1 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/v8
+curl -X PUT -i -F version=4.2.2 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/v4
 ```
 
 ### Update Alias
@@ -334,6 +389,10 @@ Form parameters:
 
 -   `:version` full version of the package to be aliased
 
+HTTP headers:
+
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
+
 Status codes:
 
 -   `303` if alias is successfully created. `location` points to the alias
@@ -344,8 +403,8 @@ Status codes:
 Example:
 
 ```bash
-curl -X POST -i -F version=8.4.1 http://localhost:4001/finn/pkg/fuzz/v8
-curl -X POST -i -F version=4.4.2 http://localhost:4001/finn/map/buzz/v4
+curl -X POST -i -F version=8.4.1 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/v8
+curl -X POST -i -F version=4.4.2 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/v4
 ```
 
 ### Delete Alias
@@ -365,6 +424,10 @@ URL parameters:
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
 
+HTTP headers:
+
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
+
 Status codes:
 
 -   `204` if alias is successfully deleted
@@ -375,6 +438,6 @@ Status codes:
 Example:
 
 ```bash
-curl -X DELETE http://localhost:4001/finn/pkg/fuzz/v8
-curl -X DELETE http://localhost:4001/finn/map/buzz/v4
+curl -X DELETE -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/v8
+curl -X DELETE -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/v4
 ```
