@@ -28,7 +28,7 @@ https://:assetServerUrl:port/:org/auth/login
 
 Form parameters:
 
--   `key` a authentication key
+-   `key` an authentication key
 
 Status codes:
 
@@ -110,7 +110,7 @@ Form parameters:
 
 HTTP headers:
 
--   `Authorization` a jwt authorization bearer with the token retrieved from a successuful [authentication](#login)
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
@@ -241,7 +241,7 @@ Form parameters:
 
 HTTP headers:
 
--   `Authorization` a jwt authorization bearer with the token retrieved from a successuful [authentication](#login)
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
@@ -351,7 +351,7 @@ Form parameters:
 
 HTTP headers:
 
--   `Authorization` a jwt authorization bearer with the token retrieved from a successuful [authentication](#login)
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
@@ -391,7 +391,7 @@ Form parameters:
 
 HTTP headers:
 
--   `Authorization` a jwt authorization bearer with the token retrieved from a successuful [authentication](#login)
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
@@ -426,7 +426,7 @@ URL parameters:
 
 HTTP headers:
 
--   `Authorization` a jwt authorization bearer with the token retrieved from a successuful [authentication](#login)
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
