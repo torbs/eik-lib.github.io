@@ -12,9 +12,9 @@ Authentication is needed to execute multiple API calls in the REST API.
 
 ### Endpoint Summary Table
 
-| Name                         | Verb | Endpoint                   | Form Fields |
-| ---------------------------- | ---- | -------------------------- | ----------- |
-| [Login](#login)              | POST  | `/:org/auth/login`        | `key`       |
+| Name                         | Verb | Endpoint              | Form Fields |
+| ---------------------------- | ---- | --------------------- | ----------- |
+| [Login](#login)              | POST  | `/auth/login`        | `key`       |
 
 ### Login
 
@@ -23,7 +23,7 @@ Authentication is needed to execute multiple API calls in the REST API.
 Logs a user in to the service.
 
 ```bash
-https://:assetServerUrl:port/:org/auth/login
+https://:assetServerUrl:port/auth/login
 ```
 
 Form parameters:
@@ -46,7 +46,7 @@ Success response: A jwt token
 Example:
 
 ```bash
-curl -X POST -i -F key=rfm940c3 http://localhost:4001/finn/auth/login
+curl -X POST -i -F key=rfm940c3 http://localhost:4001/auth/login
 ```
 
 ## Packages
@@ -55,10 +55,10 @@ Modules are packages of files to be loaded by a browser. Modules are versioned a
 
 ### Endpoint Summary Table
 
-| Name                                      | Verb | Endpoint                           | Form Fields |
-| ----------------------------------------- | ---- | ---------------------------------- | ----------- |
-| [Public Package URL](#public-package-url) | GET  | `/:org/pkg/:name/:version/:extras` |             |
-| [Upload a Package](#upload-a-package)     | PUT  | `/:org/pkg/:name/:version`         | `package`   |
+| Name                                      | Verb | Endpoint                      | Form Fields |
+| ----------------------------------------- | ---- | ----------------------------- | ----------- |
+| [Public Package URL](#public-package-url) | GET  | `/pkg/:name/:version/:extras` |             |
+| [Upload a Package](#upload-a-package)     | PUT  | `/pkg/:name/:version`         | `package`   |
 
 ### Public Package URL
 
@@ -67,12 +67,11 @@ Modules are packages of files to be loaded by a browser. Modules are versioned a
 Retrieves files from a module at the service.
 
 ```bash
-https://:assetServerUrl:port/:org/pkg/:name/:version/:extras
+https://:assetServerUrl:port/pkg/:name/:version/:extras
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:name` is the name of the package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:version` is the version of the package. Validator: Comply with [semver validation regex](https://semver.org/).
 -   `:extras` whildcard pathname to any file in the package
@@ -85,7 +84,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X GET http://localhost:4001/finn/pkg/fuzz/8.4.1/main/index.js
+curl -X GET http://localhost:4001/pkg/fuzz/8.4.1/main/index.js
 ```
 
 ### Upload a package
@@ -95,12 +94,11 @@ curl -X GET http://localhost:4001/finn/pkg/fuzz/8.4.1/main/index.js
 Puts a new package at the service.
 
 ```bash
-https://:assetServerUrl:port/:org/pkg/:name/:version
+https://:assetServerUrl:port/pkg/:name/:version
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:name` is the name of the package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:version` is the version of the package. Validator: Comply with [semver validation regex](https://semver.org/).
 
@@ -124,7 +122,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X PUT -i -F package=@archive.tgz -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/8.4.1
+curl -X PUT -i -F package=@archive.tgz -H "Authorization: Bearer {:token}" http://localhost:4001/pkg/fuzz/8.4.1
 ```
 
 ### Latest Package versions
@@ -134,12 +132,11 @@ curl -X PUT -i -F package=@archive.tgz -H "Authorization: Bearer {:token}" http:
 Retrieves an overview of the latest major versions of a package.
 
 ```bash
-https://:assetServerUrl:port/:org/pkg/:name
+https://:assetServerUrl:port/pkg/:name
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:name` is the name of the package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 
 Status codes:
@@ -150,7 +147,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X GET http://localhost:4001/finn/pkg/fuzz
+curl -X GET http://localhost:4001/pkg/fuzz
 ```
 
 ### Package version overview
@@ -160,12 +157,11 @@ curl -X GET http://localhost:4001/finn/pkg/fuzz
 Retrieves an overview of the files of a package version.
 
 ```bash
-https://:assetServerUrl:port/:org/pkg/:name/:version
+https://:assetServerUrl:port/pkg/:name/:version
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:name` is the name of the package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:version` is the version of the package. Validator: Comply with [semver validation regex](https://semver.org/).
 
@@ -177,7 +173,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X GET http://localhost:4001/finn/pkg/fuzz
+curl -X GET http://localhost:4001/pkg/fuzz
 ```
 
 ## Import Maps
@@ -187,10 +183,10 @@ Import maps are versioned and are immutable.
 
 ### Endpoint Summary Table
 
-| Name                                            | Verb | Endpoint                   | Form Fields |
-| ----------------------------------------------- | ---- | -------------------------- | ----------- |
-| [Public Import Map URL](#public-import-map-url) | GET  | `/:org/map/:name/:version` |             |
-| [Upload an Import Map](#upload-an-import-map)   | PUT  | `/:org/map/:name/:version` | `map`       |
+| Name                                            | Verb | Endpoint              | Form Fields |
+| ----------------------------------------------- | ---- | --------------------- | ----------- |
+| [Public Import Map URL](#public-import-map-url) | GET  | `/map/:name/:version` |             |
+| [Upload an Import Map](#upload-an-import-map)   | PUT  | `/map/:name/:version` | `map`       |
 
 ### Public Import Maps URL
 
@@ -199,12 +195,11 @@ Import maps are versioned and are immutable.
 Retrieves an import map from the service.
 
 ```bash
-https://:assetServerUrl:port/:org/map/:name/:version
+https://:assetServerUrl:port/map/:name/:version
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:name` is the name of the import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:version` is the version of the import map. Validator: Comply with [semver validation regex](https://semver.org/).
 
@@ -216,7 +211,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X GET http://localhost:4001/finn/map/buzz/8.4.1
+curl -X GET http://localhost:4001/map/buzz/8.4.1
 ```
 
 ### Upload an Import Map
@@ -226,12 +221,11 @@ curl -X GET http://localhost:4001/finn/map/buzz/8.4.1
 Puts a new import map at the service.
 
 ```bash
-https://:assetServerUrl:port/:org/map/:name/:version
+https://:assetServerUrl:port/map/:name/:version
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:name` is the name of the import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:version` is the version of the import map. Validator: Comply with [semver validation regex](https://semver.org/).
 
@@ -255,7 +249,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X PUT -i -F map=@import-map.json -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/8.4.1
+curl -X PUT -i -F map=@import-map.json -H "Authorization: Bearer {:token}" http://localhost:4001/map/buzz/8.4.1
 ```
 
 ### Latest Import Map versions
@@ -265,12 +259,11 @@ curl -X PUT -i -F map=@import-map.json -H "Authorization: Bearer {:token}" http:
 Retrieves an overview of the latest versions of a Import Map.
 
 ```bash
-https://:assetServerUrl:port/:org/map/:name
+https://:assetServerUrl:port/map/:name
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:name` is the name of the import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 
 Status codes:
@@ -281,7 +274,7 @@ Status codes:
 Example:
 
 ```bash
-curl -X GET http://localhost:4001/finn/map/buzz
+curl -X GET http://localhost:4001/map/buzz
 ```
 
 ## Aliases
@@ -291,12 +284,12 @@ An alias is a shorthand between a major version of a package / import map and th
 
 ### Endpoint Summary Table
 
-| Name                                  | Verb   | Endpoint                            | Form Fields |
-| ------------------------------------- | ------ | ----------------------------------- | ----------- |
-| [Public Alias URL](#public-alias-url) | GET    | `/:org/:type/:name/v:alias/:extras` |             |
-| [Create Alias](#create-alias)         | PUT    | `/:org/:type/:name/v:alias`         | `version`   |
-| [Update Alias](#update-alias)         | POST   | `/:org/:type/:name/v:alias`         | `version`   |
-| [Delete Alias](#delete-alias)         | DELETE | `/:org/:type/:name/v:alias`         |             |
+| Name                                  | Verb   | Endpoint                       | Form Fields |
+| ------------------------------------- | ------ | ------------------------------ | ----------- |
+| [Public Alias URL](#public-alias-url) | GET    | `/:type/:name/v:alias/:extras` |             |
+| [Create Alias](#create-alias)         | PUT    | `/:type/:name/v:alias`         | `version`   |
+| [Update Alias](#update-alias)         | POST   | `/:type/:name/v:alias`         | `version`   |
+| [Delete Alias](#delete-alias)         | DELETE | `/:type/:name/v:alias`         |             |
 
 ### Public Alias URL
 
@@ -305,12 +298,11 @@ An alias is a shorthand between a major version of a package / import map and th
 Retrieves files from a package or an import map at the service.
 
 ```bash
-https://:assetServerUrl:port/:org/:type/:name/v:alias/:extras
+https://:assetServerUrl:port/:type/:name/v:alias/:extras
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
@@ -324,8 +316,8 @@ Status codes:
 Example:
 
 ```bash
- curl -X GET -L http://localhost:4001/finn/pkg/fuzz/v8/main/index.js
- curl -X GET -L http://localhost:4001/finn/map/buzz/v4
+curl -X GET -L http://localhost:4001/pkg/fuzz/v8/main/index.js
+curl -X GET -L http://localhost:4001/map/buzz/v4
 ```
 
 ### Create Alias
@@ -335,12 +327,11 @@ Example:
 Create a new alias.
 
 ```bash
-https://:assetServerUrl:port/:org/:type/:name/v:alias
+https://:assetServerUrl:port/:type/:name/v:alias
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
@@ -364,8 +355,8 @@ Status codes:
 Example:
 
 ```bash
-curl -X PUT -i -F version=8.4.1 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/v8
-curl -X PUT -i -F version=4.2.2 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/v4
+curl -X PUT -i -F version=8.4.1 -H "Authorization: Bearer {:token}" http://localhost:4001/pkg/fuzz/v8
+curl -X PUT -i -F version=4.2.2 -H "Authorization: Bearer {:token}" http://localhost:4001/map/buzz/v4
 ```
 
 ### Update Alias
@@ -375,12 +366,11 @@ curl -X PUT -i -F version=4.2.2 -H "Authorization: Bearer {:token}" http://local
 Updates an existing alias.
 
 ```bash
-https://:assetServerUrl:port/:org/:type/:name/v:alias
+https://:assetServerUrl:port/:type/:name/v:alias
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
@@ -403,8 +393,8 @@ Status codes:
 Example:
 
 ```bash
-curl -X POST -i -F version=8.4.1 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/v8
-curl -X POST -i -F version=4.4.2 -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/v4
+curl -X POST -i -F version=8.4.1 -H "Authorization: Bearer {:token}" http://localhost:4001/pkg/fuzz/v8
+curl -X POST -i -F version=4.4.2 -H "Authorization: Bearer {:token}" http://localhost:4001/map/buzz/v4
 ```
 
 ### Delete Alias
@@ -414,12 +404,11 @@ curl -X POST -i -F version=4.4.2 -H "Authorization: Bearer {:token}" http://loca
 Deletes an existing alias.
 
 ```bash
-https://:assetServerUrl:port/:org/:type/:name/v:alias
+https://:assetServerUrl:port/:type/:name/v:alias
 ```
 
 URL parameters:
 
--   `:org` is the name of your organisation. Validator: [`^[a-zA-Z0-9_-]+$`](https://regexper.com/#%5E%5Ba-zA-Z0-9_-%5D%2B%24).
 -   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
@@ -438,6 +427,6 @@ Status codes:
 Example:
 
 ```bash
-curl -X DELETE -H "Authorization: Bearer {:token}" http://localhost:4001/finn/pkg/fuzz/v8
-curl -X DELETE -H "Authorization: Bearer {:token}" http://localhost:4001/finn/map/buzz/v4
+curl -X DELETE -H "Authorization: Bearer {:token}" http://localhost:4001/pkg/fuzz/v8
+curl -X DELETE -H "Authorization: Bearer {:token}" http://localhost:4001/map/buzz/v4
 ```
