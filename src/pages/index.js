@@ -8,17 +8,17 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Conseptual overview</>,
+    title: <>Conceptual Overview</>,
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Get the overview of how the Eik assets server works and helps you improve performance.
+        Get an overview of how the Eik asset server works and helps you improve performance.
       </>
     ),
     linkUrl: 'docs/overview',
   },
   {
-    title: <>Publish assets</>,
+    title: <>Publish Assets</>,
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
@@ -28,7 +28,7 @@ const features = [
     linkUrl: 'docs/client',
   },
   {
-    title: <>Serve assets</>,
+    title: <>Serve Assets</>,
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
