@@ -4,7 +4,6 @@ title: Client
 sidebar_label: Client
 ---
 
-
 ## Installation
 
 ```sh
@@ -24,7 +23,7 @@ eik init
 Fill in the generated `assets.json` file with the necessary details.
 
 For the `server` property, if you are using a locally running asset server
-the server property will likely be `http://localhost:4001`
+the server property will likely be `http://assets.examplecdn.com`
 
 Set the `js.input` and `css.input` properties of `assets.json` with paths to client side
 asset files in your project relative to the `assets.json` file.
@@ -38,30 +37,20 @@ Run publish to publish your assets to the server
 eik publish
 ```
 
-For subsequent publishes, you will need to version your `asset.json` file before publishing again
-since each publish version is immutable. You can do this by editing `assets.json` and setting a
-new previously unpublished `version`. You should adhere to `semver` using a version number that makes sense. The cli can help you with this.
-
-Eg. To bump the version from `1.0.0` to `1.0.1` you can use the version patch command like so:
-
-```sh
-eik version patch
-```
-
 ## Additional tasks
 
-### Publishing organisation wide global dependencies
+### Publishing global dependencies
 
-When you wish to share a version of a module used across an organisation, you can use the `dependency` command to do so.
+When you wish to share a version of a module, you can use the `dependency` command to do so.
 
 This feature does the following:
 
--   converts a module already published to npm to esm
--   makes it available through the asset server
+- converts a module already published to npm to esm
+- makes it available through the asset server
 
 #### Example use case
 
-You might decide that all teams across your organisation should use the same version of lodash via a publish url (rather than each team bundling their own version).
+You might decide that all teams across your organisation should use the same version of lodash via a published URL (rather than each team bundling their own version).
 
 To do so you would run:
 
@@ -70,20 +59,20 @@ eik dependency lodash 4.17.15
 ```
 
 After running this, an esm friendly version of lodash will be available at the url:
-`http://<asset server url>/<organisation>/pkg/lodash/4.17.15`
+`http://<asset server url>/pkg/lodash/4.17.15`
 
 It's now possible for each team to reference this globally published module directly in their
 own client side code as follows:
 
 ```js
-import lodash from `http://<asset server url>/<organisation>/pkg/lodash/4.17.15`;
+import lodash from `http://<asset server url>/pkg/lodash/4.17.15`;
 ```
 
-This has the benefit that if all teams are referencing lodash in this way, the browser will cache the module the first time it encouters it and all subsequent pages will not need to download it again.
+This has the benefit that if all teams are referencing lodash in this way, the browser will cache the module the first time it encounters it and on subsequent pages will not need to download it again.
 
 ### Aliasing published modules
 
-Aliasing allows you to tag specific published versions of modules with a more general tag or version that you are also able to centrally change and control as needed.
+Aliasing allows you to tag specific published versions of modules with a more general tag or version that you are also able to centrally change as needed.
 
 The benefit of this is that you can alias a specific version of a dependency and then update that alias overtime as you publish new versions of the dependency and have all dependents immediately receive the change.
 
@@ -100,7 +89,7 @@ eik alias lodash 4.15.15 4
 We can now change our import statement to:
 
 ```js
-import lodash from `http://<asset server url>/<organisation>/pkg/lodash/v4`;
+import lodash from `http://<asset server url>/pkg/lodash/v4`;
 ```
 
 and everything will work as before.
@@ -111,7 +100,7 @@ When a new version of lodash comes out, we can create a global dependency for it
 eik dependency lodash 4.17.16
 ```
 
-And then create a major semver alias for the new version like so:
+And then update the major semver alias to the new version like so:
 
 ```sh
 eik alias lodash 4.15.16 4
@@ -121,9 +110,9 @@ In this way, no client side code will need to be updated to reflect this change 
 
 ### Using import maps to map "bare imports"
 
-Import maps are [an emerging standard](https://github.com/WICG/import-maps) and a way to map "bare imports" such as `foo` in the import statement `import { bar, baz } from 'foo'` to modules to be loaded. With Eik, we provide a way to upload import map files and to specify them for use in bundling. Doing so allows you to specify, across an organisation, a common set of shared modules whether they be `react` or `lit-html` or whatever.
+Import maps are [an emerging standard](https://github.com/WICG/import-maps) and a way to map "bare imports" such as `foo` in the import statement `import { bar, baz } from 'foo'` to modules to be loaded. With Eik, we provide a way to upload import map files and to specify them for use in bundling. Doing so allows you to specify a common set of shared modules, whether they be `react` or `lit-html` etc.
 
-Making use of import maps is as follows.
+Making use of import maps is done as follows.
 
 1. Define an import map json file
 2. Use the Eik CLI to upload the import map to the server
@@ -136,30 +125,30 @@ Given the following import map file `import-map.json`
 
 ```json
 {
-    "imports": {
-        "lit-html": "http://localhost:4001/finn/pkg/lit-html/v1/index.js",
-        "lodash": "http://localhost:4001/finn/pkg/lodash/v4/index.js"
-    }
+  "imports": {
+    "lit-html": "http://assets.examplecdn.com/pkg/lit-html/v1/index.js",
+    "lodash": "http://assets.examplecdn.com/pkg/lodash/v4/index.js"
+  }
 }
 ```
 
 The following command will upload the import map file `./import-map.json` in the current directory using the name `my-import-map` and the version `1.0.0`
 
 ```sh
-eik --org finn map my-import-map 1.0.0 ./import-map.json
+eik map my-import-map 1.0.0 ./import-map.json
 ```
 
 Given the following line now added to `assets.json`
 
 ```json
 {
-    "import-map": ["http://localhost:4001/finn/map/my-import-map/1.0.0"]
+  "import-map": ["http://assets.examplecdn.com/map/my-import-map/1.0.0"]
 }
 ```
 
 When we run `eik publish` any "bare imports" refering to either `lit-html` or `lodash` will be mapped to the URLs in our map.
 
-In this way, you can control which version of `react` or `lit-html` or `lodash` all the apps in your organisation are using. In combination with package `alias` URLs you have a powerful way to manage key shared dependencies for your apps in production without the need to redeploy or rebundle when a new version of a dependency is released.
+In this way, you can control which version of `react` or `lit-html` or `lodash` all your apps are using. In combination with package `alias` URLs, you have a powerful way to manage key shared dependencies for your apps in production without the need to redeploy or rebundle when a new version of a dependency is released.
 
 ### Accessing meta information about a package
 
@@ -179,7 +168,8 @@ eik meta lodash 4.17.16
 | command    | aliases | description                                                     |
 | ---------- | ------- | --------------------------------------------------------------- |
 | init       | i       | Create an assets.json file in the current directory             |
-| version    | v       | Helper command for bumping your apps `asset.json` version field |
+| login      |         | Authenticates client with eik server                            |
+| ping       |         | Pings eik server                                                |
 | publish    | p, pub  | Publish an app bundle                                           |
 | dependency | d, dep  | Publish a dependency bundle                                     |
 | map        | m       | Sets or deletes a "bare" import entry in an import-map file     |
@@ -194,80 +184,50 @@ This command takes no input and creates a new `assets.json` file in the current 
 
 ```json
 {
-    "organisation": "[required]",
-    "name": "[required]",
-    "version": "1.0.0",
-    "server": "http://assets-server.svc.prod.finn.no",
-    "js": {
-        "input": "[path to js entrypoint]",
-        "options": {}
-    },
-    "css": {
-        "input": "[path to css entrypoint]",
-        "options": {}
-    },
-    "import-map": []
+  "name": "",
+  "server": "",
+  "js": {
+    "input": "",
+    "options": {}
+  },
+  "css": {
+    "input": "",
+    "options": {}
+  },
+  "import-map": []
 }
 ```
 
-You will then need to change the various fields as appropriate. If you are running a local asset server, the default server url should be `http://localhost:4001`.
+You will then need to set the various fields as appropriate. If you are running a local asset server, the default server url should be `http://localhost:8080`.
 
 ##### assets.json properties
 
 | property     | description                                                         |
 | ------------ | ------------------------------------------------------------------- |
-| organisation | Unique organisation namespace of your choosing                      |
-| name         | App name, must be unique to each organisation                       |
-| version      | App version, unique to each app. Must be increased for each publish |
+| name         | App name, must be unique to the Eik server                          |
 | server       | Address to the asset server                                         |
 | js           | Configuration for JavaScript assets                                 |
 | css          | Configuration for CSS assets                                        |
 | import-map   | Specify import maps to be used to map bare imports during bundling  |
 
-###### organisation
-
-All asset uploads are scoped to an `organisation`. You may choose any organisation name that is not already taken or that you already belong to. Organisation names may contain any letters or numbers as well as the `-` and `_` characters.
-
-_Example_
-
-```json
-{
-    "organisation": "finn"
-}
-```
-
 ###### name
 
-All asset uploads within each organisation must have a name. When publishing a dependency from npm the name will be the package name taken from the module's `package.json` file. When publishing the assets for your app, the `name` field of your project's `assets.json` file is used.
+All asset uploads must have a name. When publishing a dependency from npm the name will be the package name taken from the module's `package.json` file. When publishing the assets for your app, the `name` field of your project's `assets.json` file is used.
 Names may contain any letters or numbers as well as the `-` and `_` characters.
 
 ```json
 {
-    "name": "my-awesome-app"
-}
-```
-
-###### version
-
-All asset uploads are unique by organisation, name and version. It is not possible to republish the same app with the same version in the same organisation. In order to publish a new version of an asset, the version number must first be incremented. When publishing an asset from npm, the version of the package comes from the packages `package.json` version field. When publishing assets for your own app, the version comes from the version specified in `assets.json`. In both cases, versions comply with semver.
-
-The `version` property in `assets.json` starts at `1.0.0` by convention and should be incremented as you see fit either manually or by using the `eik version major|minor|patch` command.
-
-Either way, when you attempt to republish a package with the same version, publishing will fail and you will need to update the version field before trying again.
-
-```json
-{
-    "version": "1.0.0"
+  "name": "my-awesome-app"
 }
 ```
 
 ###### server
 
-This is the address to the asset server you are using. This might be a locally running version of the asset server (usually `http://localhost:4001`) or an asset server running in production (TBD)
+This is the address to the asset server you are using. This might be a locally running version of the asset server (usually `http://assets.examplecdn.com`) or an asset server running in production (TBD)
 
 ```json
 {
-    "server": "http://localhost:4001"
+  "server": "http://assets.examplecdn.com"
 }
 ```
 
@@ -279,9 +239,9 @@ _scripts.js file inside assets folder_
 
 ```json
 {
-    "js": {
-        "input": "./assets/scripts.js"
-    }
+  "js": {
+    "input": "./assets/scripts.js"
+  }
 }
 ```
 
@@ -293,9 +253,9 @@ _styles.css file inside assets folder_
 
 ```json
 {
-    "css": {
-        "input": "./assets/styles.css"
-    }
+  "css": {
+    "input": "./assets/styles.css"
+  }
 }
 ```
 
@@ -307,43 +267,50 @@ _defining a single import map file_
 
 ```json
 {
-    "import-map": ["http://localhost:4001/map/my-import-map/1.0.0"]
+  "import-map": ["http://assets.examplecdn.com/map/my-import-map/1.0.0"]
 }
 ```
 
-#### version
+#### login
 
-This command updates the `version` field of an `assets.json` file in the current directory based on the argument given (`major`, `minor`, `patch`).
+Authenticate with the configured Eik server. The `server` field in `assets.json` will be used to determine which server to authenticate with. It is also possible to set the server without the need for an `assets.json`
+file using the command line flag `--server` or `-s`
 
 The command takes the form:
 
 ```sh
-eik version major|minor|patch [optional arguments]
+eik login [optional arguments]
 ```
 
-**Examples**
+**Example**
 
-_Increase the version's semver major by 1_
+_Authenticate with Eik server using a prompt_
 
 ```bash
-eik version major
+eik login
 ```
 
-_Increase the version's semver minor by 1_
+_Authenticate with Eik server using a given key_
 
 ```bash
-eik version minor
+eik login --key some_key
 ```
 
-_Increase the version's semver patch by 1_
+#### ping
 
-```bash
-eik version patch
+Ping the configured Eik server.
+
+**Example**
+
+_Ping Eik server_
+
+```sh
+eik ping
 ```
 
 #### publish
 
-This command publishes the app's client side assets to the asset server based on the values in an `assets.json` file in the current directory.
+This command publishes the app's client side assets to an Eik server based on the values in an `assets.json` file in the current directory.
 
 The command takes the form:
 
@@ -361,9 +328,9 @@ eik publish
 
 #### dependency
 
-This command will download the specified (by name and version) package from NPM, create a bundle with it and then publish it to the asset server. The resulting bundle will be in esm module format, converting from common js if needed.
+This command will download the specified (by name and version) package from NPM, create a bundle with it and then publish it to the Eik server. The resulting bundle will be in esm module format, converting from common js if needed.
 
-_Note_ The arguments `server`, `organisation` and `import-map` are taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify these values with the command line flags `--server`, `--org` and `--map`.
+_Note_ The arguments `server` and `import-map` are taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify these values with the command line flags `--server` and `--map`.
 
 The command takes the form:
 
@@ -377,14 +344,14 @@ _Publishing a dependency from npm_
 
 ```bash
 eik dependency lit-html 1.1.2
-# eik dependency --server http://localhost:4001 --org finn --map http://localhost:4001/finn/map/my-import-map/1.0.0 lit-html 1.1.2
+# eik dependency --server http://assets.examplecdn.com --map http://assets.examplecdn.com/finn/map/my-import-map/1.0.0 lit-html 1.1.2
 ```
 
 #### alias
 
 This command creates a semver alias for a given published bundle. Creating aliases allows for more flexible referencing of published bundles. You can update an alias to point to the latest version of a bundle without needing to update every client that makes use of your bundle.
 
-_Note_ The arguments `server` and `organisation` are taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify these values with the command line flags `--server` and `--org`.
+_Note_ The `server` argument is taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify this values with the command line flag `--server`.
 
 The command takes the form:
 
@@ -398,7 +365,7 @@ Running the following command...
 
 ```bash
 eik alias lit-html 1.1.2 1
-# eik alias --server http://localhost:4001 --org finn lit-html 1.1.2 1
+# eik alias --server http://assets.examplecdn.com lit-html 1.1.2 1
 ```
 
 ...will create or update the `lit-html` alias `1` to point at `lit-html` version `1.1.2`
@@ -409,14 +376,14 @@ This command uploads an import map json file you have created locally to the ser
 
 ```json
 {
-    "imports": {
-        "<dependency name 1>": "url to dependency",
-        "<dependency name 2>": "url to dependency"
-    }
+  "imports": {
+    "<dependency name 1>": "url to dependency",
+    "<dependency name 2>": "url to dependency"
+  }
 }
 ```
 
-_Note_ The arguments `server` and `organisation` are taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify these values with the command line flags `--server` and `--org`.
+_Note_ The argument `server` is taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify this value with the command line flag `--server`.
 
 The command takes the form:
 
@@ -426,7 +393,7 @@ eik map [optional arguments] <name> <version> <path to file>
 
 ```bash
 eik map my-import-map 1.0.0 ./import-map.json
-# eik map --server http://localhost:4001 --org finn my-import-map 1.0.0 ./import-map.json
+# eik map --server http://assets.examplecdn.com my-import-map 1.0.0 ./import-map.json
 ```
 
 #### meta
@@ -445,7 +412,7 @@ Running the following command...
 
 ```bash
 eik meta lit-html 1.1.2
-# eik meta --server http://localhost:4001 --org finn lit-html 1.1.2
+# eik meta --server http://assets.examplecdn.com lit-html 1.1.2
 ```
 
 Will print meta information about the package `lit-html` version `1.1.2` in JSON format.
@@ -457,7 +424,7 @@ All of the commands described above can be used programmatically by importing th
 ### init
 
 ```js
-const cli = require('@eik/cli');
+const cli = require("@eik/cli");
 const result = await new cli.Init(options).run();
 ```
 
@@ -467,32 +434,15 @@ const result = await new cli.Init(options).run();
 | ------- | ------------------------------------- | ------ | --------------- | -------- |
 | logger  | log4j compliant logger object         | object | `null`          | no       |
 | cwd     | path to current working directory     | string | `process.cwd()` | no       |
-| org     | organisation name                     | string | `''`            | no       |
 | name    | app name                              | string | `''`            | no       |
-| version | app version                           | string | `'1.0.0'`       | no       |
 | server  | URL to asset server                   | string | `''`            | no       |
 | js      | path to client side script entrypoint | string | `''`            | no       |
 | css     | path to client side style entrypoint  | string | `''`            | no       |
 
-### version
-
-```js
-const cli = require('@eik/cli');
-const result = await new cli.Version(options).run();
-```
-
-#### options
-
-| name   | description                           | type   | default         | options                   | required |
-| ------ | ------------------------------------- | ------ | --------------- | ------------------------- | -------- |
-| logger | log4j compliant logger object         | object | `null`          |                           | no       |
-| cwd    | path to current working directory     | string | `process.cwd()` |                           | no       |
-| level  | semver level to bump version field by | string |                 | `major`, `minor`, `patch` | yes      |
-
 ### publish
 
 ```js
-const cli = require('@eik/cli');
+const cli = require("@eik/cli");
 const result = await new cli.publish.App(options).run();
 ```
 
@@ -502,9 +452,7 @@ const result = await new cli.publish.App(options).run();
 | ------- | ------------------------------------- | -------- | --------------- | -------- |
 | logger  | log4j compliant logger object         | object   | `null`          | no       |
 | cwd     | path to current working directory     | string   | `process.cwd()` | no       |
-| org     | organisation name                     | string   |                 | yes      |
 | name    | app name                              | string   |                 | yes      |
-| version | app version                           | string   |                 | yes      |
 | server  | URL to asset server                   | string   |                 | yes      |
 | js      | path to client side script entrypoint | string   |                 | yes      |
 | css     | path to client side style entrypoint  | string   |                 | yes      |
@@ -514,7 +462,7 @@ const result = await new cli.publish.App(options).run();
 ### dependency
 
 ```js
-const cli = require('@eik/cli');
+const cli = require("@eik/cli");
 const result = await new cli.publish.Dependency(options).run();
 ```
 
@@ -524,9 +472,7 @@ const result = await new cli.publish.Dependency(options).run();
 | ------- | --------------------------------- | -------- | --------------- | -------- |
 | logger  | log4j compliant logger object     | object   | `null`          | no       |
 | cwd     | path to current working directory | string   | `process.cwd()` | no       |
-| org     | organisation name                 | string   |                 | yes      |
 | name    | app name                          | string   |                 | yes      |
-| version | app version                       | string   |                 | yes      |
 | server  | URL to asset server               | string   |                 | yes      |
 | map     | array of urls of import map files | string[] | `[]`            | no       |
 | dryRun  | exit early and print results      | boolean  | false           | no       |
@@ -534,7 +480,7 @@ const result = await new cli.publish.Dependency(options).run();
 ### map
 
 ```js
-const cli = require('@eik/cli');
+const cli = require("@eik/cli");
 const result = await new cli.publish.Map(options).run();
 ```
 
@@ -544,7 +490,6 @@ const result = await new cli.publish.Map(options).run();
 | ------- | -------------------------------------- | ------ | --------------- | -------- |
 | logger  | log4j compliant logger object          | object | `null`          | no       |
 | cwd     | path to current working directory      | string | `process.cwd()` | no       |
-| org     | organisation name                      | string |                 | yes      |
 | name    | app name                               | string |                 | yes      |
 | version | app version                            | string |                 | yes      |
 | server  | URL to asset server                    | string |                 | yes      |
@@ -553,7 +498,7 @@ const result = await new cli.publish.Map(options).run();
 ### alias
 
 ```js
-const cli = require('@eik/cli');
+const cli = require("@eik/cli");
 const result = await new cli.Alias(options).run();
 ```
 
@@ -563,16 +508,14 @@ const result = await new cli.Alias(options).run();
 | ------- | --------------------------------------- | ------ | ------- | ------------ | -------- |
 | logger  | log4j compliant logger object           | object | `null`  |              | no       |
 | server  | URL to asset server                     | string |         |              | yes      |
-| org     | organisation name                       | string |         |              | yes      |
 | type    | type of resource to alias               | string |         | `pkg`, `map` | yes      |
 | name    | app name                                | string |         |              | yes      |
-| version | app version                             | string |         |              | yes      |
 | alias   | major number of a semver version number | string |         |              | yes      |
 
 ### meta
 
 ```js
-const cli = require('@eik/cli');
+const cli = require("@eik/cli");
 const result = await new cli.Meta(options).run();
 ```
 
@@ -580,6 +523,4 @@ const result = await new cli.Meta(options).run();
 | ------- | ----------------------------- | ------ | ------- | ------- | -------- |
 | logger  | log4j compliant logger object | object | `null`  |         | no       |
 | server  | URL to asset server           | string |         |         | yes      |
-| org     | organisation name             | string |         |         | yes      |
 | name    | package name                  | string |         |         | yes      |
-| version | package version               | string |         |         | yes      |
