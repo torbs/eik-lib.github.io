@@ -23,7 +23,7 @@ eik init
 Fill in the generated `assets.json` file with the necessary details.
 
 For the `server` property, if you are using a locally running asset server
-the server property will likely be `http://assets.finncdn.no`
+the server property will likely be `http://assets.examplecdn.com`
 
 Set the `js.input` and `css.input` properties of `assets.json` with paths to client side
 asset files in your project relative to the `assets.json` file.
@@ -126,8 +126,8 @@ Given the following import map file `import-map.json`
 ```json
 {
   "imports": {
-    "lit-html": "http://assets.finncdn.no/pkg/lit-html/v1/index.js",
-    "lodash": "http://assets.finncdn.no/pkg/lodash/v4/index.js"
+    "lit-html": "http://assets.examplecdn.com/pkg/lit-html/v1/index.js",
+    "lodash": "http://assets.examplecdn.com/pkg/lodash/v4/index.js"
   }
 }
 ```
@@ -142,7 +142,7 @@ Given the following line now added to `assets.json`
 
 ```json
 {
-  "import-map": ["http://assets.finncdn.no/map/my-import-map/1.0.0"]
+  "import-map": ["http://assets.examplecdn.com/map/my-import-map/1.0.0"]
 }
 ```
 
@@ -223,11 +223,11 @@ Names may contain any letters or numbers as well as the `-` and `_` characters.
 
 ###### server
 
-This is the address to the asset server you are using. This might be a locally running version of the asset server (usually `http://assets.finncdn.no`) or an asset server running in production (TBD)
+This is the address to the asset server you are using. This might be a locally running version of the asset server (usually `http://assets.examplecdn.com`) or an asset server running in production (TBD)
 
 ```json
 {
-  "server": "http://assets.finncdn.no"
+  "server": "http://assets.examplecdn.com"
 }
 ```
 
@@ -267,7 +267,7 @@ _defining a single import map file_
 
 ```json
 {
-  "import-map": ["http://assets.finncdn.no/map/my-import-map/1.0.0"]
+  "import-map": ["http://assets.examplecdn.com/map/my-import-map/1.0.0"]
 }
 ```
 
@@ -344,7 +344,7 @@ _Publishing a dependency from npm_
 
 ```bash
 eik dependency lit-html 1.1.2
-# eik dependency --server http://assets.finncdn.no --map http://assets.finncdn.no/finn/map/my-import-map/1.0.0 lit-html 1.1.2
+# eik dependency --server http://assets.examplecdn.com --map http://assets.examplecdn.com/finn/map/my-import-map/1.0.0 lit-html 1.1.2
 ```
 
 #### alias
@@ -365,7 +365,7 @@ Running the following command...
 
 ```bash
 eik alias lit-html 1.1.2 1
-# eik alias --server http://assets.finncdn.no lit-html 1.1.2 1
+# eik alias --server http://assets.examplecdn.com lit-html 1.1.2 1
 ```
 
 ...will create or update the `lit-html` alias `1` to point at `lit-html` version `1.1.2`
@@ -393,7 +393,7 @@ eik map [optional arguments] <name> <version> <path to file>
 
 ```bash
 eik map my-import-map 1.0.0 ./import-map.json
-# eik map --server http://assets.finncdn.no my-import-map 1.0.0 ./import-map.json
+# eik map --server http://assets.examplecdn.com my-import-map 1.0.0 ./import-map.json
 ```
 
 #### meta
@@ -412,7 +412,7 @@ Running the following command...
 
 ```bash
 eik meta lit-html 1.1.2
-# eik meta --server http://assets.finncdn.no lit-html 1.1.2
+# eik meta --server http://assets.examplecdn.com lit-html 1.1.2
 ```
 
 Will print meta information about the package `lit-html` version `1.1.2` in JSON format.
