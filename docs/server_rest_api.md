@@ -51,7 +51,10 @@ curl -X POST -i -F key=rfm940c3 http://localhost:4001/auth/login
 
 ## Packages
 
-Modules are packages of files to be loaded by a browser. Modules are versioned and consist of one or more files. A module are immutable.
+A packages is a set of files, javascript, css etc, which is intended to be referenced from a HTML document and
+loaded by a browser.
+
+Packages are versioned and consist of one or more files. A package are immutable.
 
 ### Endpoint Summary Table
 
@@ -64,7 +67,7 @@ Modules are packages of files to be loaded by a browser. Modules are versioned a
 
 **Method:** `GET`
 
-Retrieves files from a module at the service.
+Retrieves files from a package at the service.
 
 ```bash
 https://:assetServerUrl:port/pkg/:name/:version/:extras
@@ -112,10 +115,10 @@ HTTP headers:
 
 Status codes:
 
--   `303` if module is successfully uploaded. `location` is root of module
+-   `303` if package is successfully uploaded. `location` is root of module
 -   `400` if validation in URL parameters or form fields fails
 -   `401` if user is not authorized
--   `409` if module already exist or version in a major range is not newer than previous version in a major range
+-   `409` if package already exist or version in a major range is not newer than previous version in a major range
 -   `415` if file format of the uploaded file is unsupported
 -   `502` if package could not be written to the sink
 
@@ -174,6 +177,136 @@ Example:
 
 ```bash
 curl -X GET http://localhost:4001/pkg/fuzz
+```
+
+## NPM Packages
+
+A NPM packages is a local replika of a module found in the [NPM registry](https://www.npmjs.com/) intended to be referenced from a HTML document and
+loaded by a browser. In many cases, with exceptions, a NPM Package will be a library or utillity [Packages](#packages) depend on.
+
+NPM Packages are versioned and consist of one or more files. A NPM package are immutable.
+
+### Endpoint Summary Table
+
+| Name                                              | Verb | Endpoint                      | Form Fields |
+| ------------------------------------------------- | ---- | ----------------------------- | ----------- |
+| [Public NPM Package URL](#public-npm-package-url) | GET  | `/npm/:name/:version/:extras` |             |
+| [Upload a NPM Package](#upload-a-npm-package)     | PUT  | `/npm/:name/:version`         | `package`   |
+
+### Public NPM Package URL
+
+**Method:** `GET`
+
+Retrieves files from a NPM package at the service.
+
+```bash
+https://:assetServerUrl:port/npm/:name/:version/:extras
+```
+
+URL parameters:
+
+-   `:name` is the name of the NPM package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
+-   `:version` is the version of the NPM package. Validator: Comply with [semver validation regex](https://semver.org/).
+-   `:extras` whildcard pathname to any file in the NPM package
+
+Status codes:
+
+-   `200` if file is successfully retrieved
+-   `404` if file is not found
+
+Example:
+
+```bash
+curl -X GET http://localhost:4001/npm/fuzz/8.4.1/main/index.js
+```
+
+### Upload a NPM Package
+
+**Method:** `PUT`
+
+Puts a new NPM package at the service.
+
+```bash
+https://:assetServerUrl:port/npm/:name/:version
+```
+
+URL parameters:
+
+-   `:name` is the name of the NPM package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
+-   `:version` is the version of the NPM package. Validator: Comply with [semver validation regex](https://semver.org/).
+
+Form parameters:
+
+-   `package` a `tar` or `tar.gz` containing the files of the NPM package
+
+HTTP headers:
+
+-   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
+
+Status codes:
+
+-   `303` if NPM package is successfully uploaded. `location` is root of module
+-   `400` if validation in URL parameters or form fields fails
+-   `401` if user is not authorized
+-   `409` if NPM package already exist or version in a major range is not newer than previous version in a major range
+-   `415` if file format of the uploaded file is unsupported
+-   `502` if NPM package could not be written to the sink
+
+Example:
+
+```bash
+curl -X PUT -i -F package=@archive.tgz -H "Authorization: Bearer {:token}" http://localhost:4001/npm/fuzz/8.4.1
+```
+
+### Latest NPM Package versions
+
+**Method:** `GET`
+
+Retrieves an overview of the latest major versions of a NPM package.
+
+```bash
+https://:assetServerUrl:port/npm/:name
+```
+
+URL parameters:
+
+-   `:name` is the name of the NPM package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
+
+Status codes:
+
+-   `200` if file is successfully retrieved
+-   `404` if file is not found
+
+Example:
+
+```bash
+curl -X GET http://localhost:4001/npm/fuzz
+```
+
+### NPM Package version overview
+
+**Method:** `GET`
+
+Retrieves an overview of the files of a NPM package version.
+
+```bash
+https://:assetServerUrl:port/npm/:name/:version
+```
+
+URL parameters:
+
+-   `:name` is the name of the NPM package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
+-   `:version` is the version of the NPM package. Validator: Comply with [semver validation regex](https://semver.org/).
+
+Status codes:
+
+-   `200` if file is successfully retrieved
+-   `404` if file is not found
+
+Example:
+
+```bash
+curl -X GET http://localhost:4001/npm/fuzz
 ```
 
 ## Import Maps

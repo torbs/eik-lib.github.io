@@ -14,7 +14,14 @@ The EIK server stores files in the following structure:
     │       ├── :version.import-map.json
     │       ├── :major.alias.json
     │       └── versions.json
-    └── pkg
+    ├── pkg
+    │   └── :name
+    │       ├── :version
+    │       │   ├── *
+    │       ├── :version.package.json
+    │       ├── :major.alias.json
+    │       └── versions.json
+    └── npm
         └── :name
             ├── :version
             │   ├── *
@@ -38,6 +45,16 @@ arbitrary and untouched during upload by the service.
 
 The file structure of a package is stored in a package file at `/:root/:org/pkg/:name/:version.package.json`.
 
+## NPM Packages
+
+NPM packages are packages found in the NPM registry and published to Eik as a "copy". Packages from
+the NPM registry is published under this namespace to avoid name collision with packages.
+
+NPM packages are stored under `/:root/:org/npm/:name/:version/` and the structure of a package is
+arbitrary and untouched during upload by the service.
+
+The file structure of a NPM package is stored in a package file at `/:root/:org/pkg/:name/:version.package.json`.
+
 ## Import Maps
 
 Import maps are stored under `/:root/:org/map/:name/:version.import-map.json`. The filename of
@@ -48,11 +65,12 @@ convert the file name according to the parameters given when uploading it.
 
 ## Aliases
 
-Both packages and import map versions can be aliased. An alias is a semver major version of a
+Packages, NPM packages and import map versions can be aliased. An alias is a semver major version of a
 full semver version and is a way to map a major version to a given full semver version of a
 package or import map.
 
 This alias mapping is stored alongside the version of a package or import map version:
 
 -   Package alias path: `/:root/:org/pkg/:name/:major.alias.json`
+-   NPM package alias path: `/:root/:org/npm/:name/:major.alias.json`
 -   Import map alias path: `/:root/:org/map/:name/:major.alias.json`
