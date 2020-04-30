@@ -67,7 +67,7 @@ Packages are versioned and consist of one or more files. A package of a specific
 
 **Method:** `GET`
 
-Retrieves files from a package at the service.
+Retrieves files from a package on the service.
 
 ```bash
 https://:assetServerUrl:port/pkg/:name/:version/:extras
