@@ -53,7 +53,7 @@ the NPM registry are published under this namespace to avoid name collision with
 NPM packages are stored under `/:root/:org/npm/:name/:version/` and the structure of a package is
 arbitrary and is not changed during upload by the service.
 
-The file structure of a NPM package is stored in a package file at `/:root/:org/pkg/:name/:version.package.json`.
+The file structure of an NPM package is stored in a package meta file at `/:root/:org/pkg/:name/:version.package.json`.
 
 ## Import Maps
 
