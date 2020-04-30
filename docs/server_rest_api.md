@@ -262,7 +262,7 @@ curl -X PUT -i -F package=@archive.tgz -H "Authorization: Bearer {:token}" http:
 
 **Method:** `GET`
 
-Retrieves an overview of the latest major versions of a NPM package.
+Retrieves an overview of the latest major versions of an NPM package.
 
 ```bash
 https://:assetServerUrl:port/npm/:name
