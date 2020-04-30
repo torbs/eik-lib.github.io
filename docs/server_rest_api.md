@@ -181,7 +181,7 @@ curl -X GET http://localhost:4001/pkg/fuzz
 
 ## NPM Packages
 
-A NPM packages is a local replika of a module found in the [NPM registry](https://www.npmjs.com/) intended to be referenced from a HTML document and
+An NPM package is a local replica of a package found in the [NPM registry](https://www.npmjs.com/) intended to be referenced from an HTML document and
 loaded by a browser. In many cases, with exceptions, a NPM Package will be a library or utillity [Packages](#packages) depend on.
 
 NPM Packages are versioned and consist of one or more files. A NPM package are immutable.
