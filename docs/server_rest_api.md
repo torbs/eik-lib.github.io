@@ -118,7 +118,7 @@ Status codes:
 -   `303` if package is successfully uploaded. `location` is root of module
 -   `400` if validation in URL parameters or form fields fails
 -   `401` if user is not authorized
--   `409` if package already exist or version in a major range is not newer than previous version in a major range
+-   `409` if package already exists or version in a major range is not newer than previous version in a major range
 -   `415` if file format of the uploaded file is unsupported
 -   `502` if package could not be written to the sink
 
