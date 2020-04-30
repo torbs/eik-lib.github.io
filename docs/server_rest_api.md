@@ -54,7 +54,7 @@ curl -X POST -i -F key=rfm940c3 http://localhost:4001/auth/login
 A packages is a set of files (javascript, css etc) that is intended to be referenced from an HTML document and
 loaded by a browser.
 
-Packages are versioned and consist of one or more files. A package are immutable.
+Packages are versioned and consist of one or more files. A package of a specific version is immutable.
 
 ### Endpoint Summary Table
 
