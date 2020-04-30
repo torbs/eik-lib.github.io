@@ -287,7 +287,7 @@ curl -X GET http://localhost:4001/npm/fuzz
 
 **Method:** `GET`
 
-Retrieves an overview of the files of a NPM package version.
+Retrieves an overview of the files of an NPM package version.
 
 ```bash
 https://:assetServerUrl:port/npm/:name/:version
