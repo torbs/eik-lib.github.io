@@ -191,7 +191,7 @@ NPM Packages are versioned and consist of one or more files. An NPM package of a
 | Name                                              | Verb | Endpoint                      | Form Fields |
 | ------------------------------------------------- | ---- | ----------------------------- | ----------- |
 | [Public NPM Package URL](#public-npm-package-url) | GET  | `/npm/:name/:version/:extras` |             |
-| [Upload a NPM Package](#upload-a-npm-package)     | PUT  | `/npm/:name/:version`         | `package`   |
+| [Upload an NPM Package](#upload-a-npm-package)     | PUT  | `/npm/:name/:version`         | `package`   |
 
 ### Public NPM Package URL
 
