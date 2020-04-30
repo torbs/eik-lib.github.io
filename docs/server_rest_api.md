@@ -241,7 +241,7 @@ Form parameters:
 
 HTTP headers:
 
--   `Authorization` a jwt authorization bearer with the token retrieved from a successful [authentication](#login)
+-   `Authorization` a JWT authorization bearer with the token retrieved from a successful [authentication](#login)
 
 Status codes:
 
