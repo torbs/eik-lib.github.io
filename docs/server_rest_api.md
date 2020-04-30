@@ -207,7 +207,7 @@ URL parameters:
 
 -   `:name` is the name of the NPM package. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:version` is the version of the NPM package. Validator: Comply with [semver validation regex](https://semver.org/).
--   `:extras` whildcard pathname to any file in the NPM package
+-   `:extras` wildcard pathname to any file in the NPM package
 
 Status codes:
 
