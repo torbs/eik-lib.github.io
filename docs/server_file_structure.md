@@ -48,7 +48,7 @@ The file structure of a package is stored in a package file at `/:root/:org/pkg/
 ## NPM Packages
 
 NPM packages are packages from the NPM registry that are then published to Eik as a "copy". Packages from
-the NPM registry is published under this namespace to avoid name collision with packages.
+the NPM registry are published under this namespace to avoid name collision with other packages.
 
 NPM packages are stored under `/:root/:org/npm/:name/:version/` and the structure of a package is
 arbitrary and untouched during upload by the service.
