@@ -197,7 +197,7 @@ NPM Packages are versioned and consist of one or more files. An NPM package of a
 
 **Method:** `GET`
 
-Retrieves files from a NPM package at the service.
+Retrieves files from an NPM package on the service.
 
 ```bash
 https://:assetServerUrl:port/npm/:name/:version/:extras
