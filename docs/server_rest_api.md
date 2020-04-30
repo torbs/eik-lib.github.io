@@ -224,7 +224,7 @@ curl -X GET http://localhost:4001/npm/fuzz/8.4.1/main/index.js
 
 **Method:** `PUT`
 
-Puts a new NPM package at the service.
+Puts a new NPM package on the service.
 
 ```bash
 https://:assetServerUrl:port/npm/:name/:version
