@@ -119,7 +119,9 @@ Status codes:
 -   `400` if validation in URL parameters or form fields fails
 -   `401` if user is not authorized
 -   `409` if package already exists or version in a major range is not newer than previous version in a major range
+-   `413` if package is too large
 -   `415` if file format of the uploaded file is unsupported
+-   `422` if a entry in the uploaded file could not be parsed or errored
 -   `502` if package could not be written to the sink
 
 Example:
@@ -191,7 +193,7 @@ NPM Packages are versioned and consist of one or more files. An NPM package of a
 | Name                                              | Verb | Endpoint                      | Form Fields |
 | ------------------------------------------------- | ---- | ----------------------------- | ----------- |
 | [Public NPM Package URL](#public-npm-package-url) | GET  | `/npm/:name/:version/:extras` |             |
-| [Upload an NPM Package](#upload-a-npm-package)     | PUT  | `/npm/:name/:version`         | `package`   |
+| [Upload an NPM Package](#upload-a-npm-package)    | PUT  | `/npm/:name/:version`         | `package`   |
 
 ### Public NPM Package URL
 
@@ -249,7 +251,9 @@ Status codes:
 -   `400` if validation in URL parameters or form fields fails
 -   `401` if user is not authorized
 -   `409` if NPM package already exist or version in a major range is not newer than previous version in a major range
+-   `413` if package is too large
 -   `415` if file format of the uploaded file is unsupported
+-   `422` if a entry in the uploaded file could not be parsed or errored
 -   `502` if NPM package could not be written to the sink
 
 Example:
@@ -436,14 +440,14 @@ https://:assetServerUrl:port/:type/:name/v:alias/:extras
 
 URL parameters:
 
--   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
+-   `:type` is the type to retrieve from. Validator: `pkg`, `npm` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
 -   `:extras` whildcard pathname to any file in a package. Does not apply to import maps.
 
 Status codes:
 
--   `303` if alias exist
+-   `307` if alias exist
 -   `404` if alias is not found
 
 Example:
@@ -465,7 +469,7 @@ https://:assetServerUrl:port/:type/:name/v:alias
 
 URL parameters:
 
--   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
+-   `:type` is the type to retrieve from. Validator: `pkg`, `npm` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
 
@@ -504,7 +508,7 @@ https://:assetServerUrl:port/:type/:name/v:alias
 
 URL parameters:
 
--   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
+-   `:type` is the type to retrieve from. Validator: `pkg`, `npm` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
 
@@ -542,7 +546,7 @@ https://:assetServerUrl:port/:type/:name/v:alias
 
 URL parameters:
 
--   `:type` is the type to retrieve from. Validator: `pkg` or `map`.
+-   `:type` is the type to retrieve from. Validator: `pkg`, `npm` or `map`.
 -   `:name` is the name of the package / import map. Validator: Comply with [npm package names](https://github.com/npm/validate-npm-package-name).
 -   `:alias` is the major version of the package / import map. Validator: Comply with [semver validation regex](https://semver.org/).
 
