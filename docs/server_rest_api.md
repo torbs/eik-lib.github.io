@@ -447,7 +447,7 @@ URL parameters:
 
 Status codes:
 
--   `307` if alias exist
+-   `302` if alias exist
 -   `404` if alias is not found
 
 Example:
