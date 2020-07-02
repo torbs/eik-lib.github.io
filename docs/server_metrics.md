@@ -4,7 +4,7 @@ title: Eik server - Metrics
 sidebar_label: Metrics
 ---
 
-The Eik server exposes a [metric stream](https://github.com/metrics-js/client) which emit internal metrics
+The Eik server exposes a [metric stream](https://github.com/metrics-js/client) which emits internal metrics
 on the server. These metrics are intended to give numbers on how the server as an application is behaving and 
 performing and is an important tool in the toolbox for monitoring the servers health status. These metrics are 
 not statistics on assets uploaded to the asset server.
