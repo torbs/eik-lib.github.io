@@ -18,7 +18,7 @@ your preferred monitoring system.
 
 ## Usage
 
-The `@eik/service` module exposes a `.metric` property. This property holds a plain node.js object stream which
+The `@eik/service` module exposes a `.metric` property. This property holds a plain Node.js object stream which
 emits the metrics as objects on the stream.
 
 This stream can be piped into a metrics consumer or any other node.js writable / transform stream for further 
