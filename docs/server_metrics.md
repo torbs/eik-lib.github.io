@@ -13,7 +13,7 @@ The metrics the server provides are not bound to any particular metric system so
 any monitoring system as preferred. The metric stream emits a set of generic metric objects that can be altered and
 piped as desired.
 
-Please see [@metrics/client](https://github.com/metrics-js/client) for examples of consuming these metrics into 
+Please see [@metrics/client](https://github.com/metrics-js/client) for examples of how to consume these metrics in 
 your favorite monitoring system.
 
 ## Usage
