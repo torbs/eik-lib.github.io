@@ -14,7 +14,7 @@ any monitoring system as preferred. The metric stream emits a set of generic met
 piped as desired.
 
 Please see [@metrics/client](https://github.com/metrics-js/client) for examples of how to consume these metrics in 
-your favorite monitoring system.
+your preferred monitoring system.
 
 ## Usage
 
