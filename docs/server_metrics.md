@@ -9,7 +9,7 @@ on the server. These metrics are intended to give numbers on how the server as a
 performing and is an important tool in the toolbox for monitoring the servers health status. These metrics do 
 not provide statistics on assets uploaded to the asset server.
 
-The metrics the server provide is not bound to a given metric system so its possible to provide the metrics to 
+The metrics the server provides are not bound to any particular metric system so it's possible to provide the metrics to 
 any monitoring system one prefer. The metric stream emits a set of generic metric objects one can alter and
 pipe in any way one would prefer.
 
