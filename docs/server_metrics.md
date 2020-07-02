@@ -21,7 +21,7 @@ your preferred monitoring system.
 The `@eik/service` module exposes a `.metric` property. This property holds a plain Node.js object stream which
 emits the metrics as objects on the stream.
 
-This stream can be piped into a metrics consumer or any other node.js writable / transform stream for further 
+This stream can be piped into a metrics consumer or any other Node.js writable / transform stream for further 
 processing.
 
 Example of metrics piped into a prometheus consumer:
