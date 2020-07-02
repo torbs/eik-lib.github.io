@@ -11,7 +11,7 @@ not provide statistics on assets uploaded to the asset server.
 
 The metrics the server provides are not bound to any particular metric system so it's possible to provide the metrics to 
 any monitoring system as preferred. The metric stream emits a set of generic metric objects that can be altered and
-pipe in any way one would prefer.
+piped as desired.
 
 Please see [@metrics/client](https://github.com/metrics-js/client) for examples of consuming these metrics into 
 your favorite monitoring system.
