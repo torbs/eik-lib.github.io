@@ -57,7 +57,7 @@ run();
 ## Metrics
 
 Each metric provided by the server has a unique `name` and a `type` defining what type (counter, histogram, etc) of 
-metrics it is.
+metric it is.
 
 The server exposes these metrics:
 
