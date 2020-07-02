@@ -24,7 +24,7 @@ emits the metrics as objects on the stream.
 This stream can be piped into a metrics consumer or any other Node.js writable / transform stream for further 
 processing.
 
-Example of metrics piped into a prometheus consumer:
+Example of metrics being piped into a prometheus consumer:
 
 ```js
 const MetricsConsumer = require('@metrics/prometheus-consumer');
