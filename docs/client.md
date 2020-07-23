@@ -14,16 +14,16 @@ npm install -g @eik/cli
 
 ### Step 1.
 
-Generate an assets.json file in the current directory
+Generate an eik.json file in the current directory
 
 ```sh
 eik init
 ```
 
-Fill in the generated `assets.json` file with the necessary details.
+Fill in the generated `eik.json` file with the necessary details.
 
-For the `server` property, if you are using a locally running asset server
-the server property will likely be `http://assets.examplecdn.com`
+For the `server` property, you will need to have set up and know the address to, and Eik asset server.
+See [the server docs](/docs/server)
 
 Set the `js.input` and `css.input` properties of `assets.json` with paths to client side
 asset files in your project relative to the `assets.json` file.

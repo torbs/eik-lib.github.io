@@ -4,7 +4,9 @@ title: Client Installation
 sidebar_label: Installation
 ---
 
-In order to interact with an Eik server, you must install the client which can then be used to perform a variety of tasks such as mirroring NPM packages, publishing app packages, aliasing, publishing import maps and more. Interacting with the client is done via the command line in a terminal. To get started, you will need to node [Node.js](https://nodejs.org/en/) installed which comes with the [NPM](npmjs.com) package manager.
+In order to interact with an Eik server, you must install the client which can then be used to perform a variety of tasks such as mirroring NPM packages, publishing app packages, aliasing, publishing import maps and more. Interacting with the client is done via the command line in a terminal. To get started, you will need to have [Node.js](https://nodejs.org/en/) installed which comes with the [NPM](npmjs.com) package manager.
+
+*N.B.* To use the client, you will need to know the address of an Eik server with which to interact. If you don't yet have a server to work with, please visit [the server docs](/docs/server) to get started configuring and running an Eik server.
 
 ## Installation using NPM
 
@@ -12,9 +14,9 @@ In order to interact with an Eik server, you must install the client which can t
 npm install @eik/cli
 ```
 
-## The eik command
+## The Eik command
 
-Once installed, open a terminal and type the following to get started
+Once installed, in your terminal, type the following command to get started.
 
 ```sh
 eik --help
@@ -30,7 +32,7 @@ eik ping http://myeikserver.com
 
 ## Adding command autocomplete
 
-If you would like to be able to get tab key autocomplete for your eik commands, you can concatentate the following script to your `.zshrc` or `.bashrc` file.
+If you would like to be able to use tab key autocompletion for Eik commands, you can concatentate the following script to your `.zshrc` or `.bashrc` file.
 
 ```
 ###-begin-eik-completions-###

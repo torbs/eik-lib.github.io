@@ -19,7 +19,7 @@ For example, an alias by the name `v1` might be set up to point to the exact pac
 Creating aliases allows you to include the alias script tags in your application with no need to update the script tag every time you publish a new bundle version.
 
 ```js
-<script type="module" defer src="https://myeikserver.com/my-app/v1/main/index.js">
+<script type="module" defer src="https://myeikserver.com/pkg/my-app/v1/index.js">
 ```
 
 ### Publishing an alias
@@ -36,10 +36,11 @@ eik package-alias my-app 1.0.0 1
 
 ### Updating an alias
 
-After publishing a new version of a package
+After publishing a new version of a package `1.0.1`
 
 ```sh
-eik package --name my-app --js ./path/to/client.js --css ./path/to/styles.css
+eik version patch
+eik package
 ```
 
 The alias can then be updated with the same alias command as before giving it the newly published version
@@ -54,74 +55,70 @@ And now `v1` will point to `1.0.1` instead of `1.0.0`
 
 ### Using an aliased version
 
-Creating aliases allows you to include the alias script tags in your application with no need to update the script tag every time you publish a new bundle version.
+Creating aliases for NPM packages that have an Eik mirror allows you to include the alias script tags in your application without needing to update the script tag every time you publish a new bundle version.
 
 ```js
-<script type="module" defer src="https://myeikserver.com/my-app/v1/main/index.js">
+<script type="module" defer src="https://myeikserver.com/npm/lodash/v4/index.js">
 ```
 
 ### Publishing an alias
 
-You can create an alias by running the package-alias command
+You can create an alias by running the npm-alias command
 
 ```
-eik package-alias <app name> <version> <alias>
+eik npm-alias <npm package name> <version> <alias>
 ```
 
 ```sh
-eik package-alias my-app 1.0.0 1
+eik npm-alias lodash 4.17.18 4
 ```
 
 ### Updating an alias
 
-After publishing a new version of a package
+After publishing a new version of the NPM package
 
 ```sh
-eik package --name my-app --js ./path/to/client.js --css ./path/to/styles.css
+eik npm lodash 4.17.19
 ```
 
 The alias can then be updated with the same alias command as before giving it the newly published version
 
 ```sh
-eik package-alias my-app 1.0.1 1
+eik npm-alias lodash 4.17.19 4
 ```
 
-And now `v1` will point to `1.0.1` instead of `1.0.0`
+And now `v4` will point to `4.17.19` instead of `4.17.18`
 
 ## Import map aliases
 
 ### Using an aliased version
 
-Creating aliases allows you to include the alias script tags in your application with no need to update the script tag every time you publish a new bundle version.
-
-```js
-<script type="module" defer src="https://myeikserver.com/my-app/v1/main/index.js">
-```
+Creating import map aliases allows you to include the import map alias in your application's `eik.json` file without the need to update it every time you publish a new version of the import map.
 
 ### Publishing an alias
 
-You can create an alias by running the package-alias command
+You can create an alias by running the map-alias command
 
 ```
-eik package-alias <app name> <version> <alias>
+eik map-alias <map name> <version> <alias>
 ```
 
 ```sh
-eik package-alias my-app 1.0.0 1
+eik map-alias my-map 1.0.0 1
 ```
 
 ### Updating an alias
 
-After publishing a new version of a package
+After publishing a new version of an import map
 
 ```sh
-eik package --name my-app --js ./path/to/client.js --css ./path/to/styles.css
+eik map my-map 1.0.1 ./import-map.json
 ```
 
 The alias can then be updated with the same alias command as before giving it the newly published version
 
 ```sh
-eik package-alias my-app 1.0.1 1
+eik map-alias my-map 1.0.1 1
 ```
 
 And now `v1` will point to `1.0.1` instead of `1.0.0`
