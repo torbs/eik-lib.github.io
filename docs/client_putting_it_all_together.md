@@ -4,7 +4,7 @@ title: Putting It All Together
 sidebar_label: Putting It All Together
 ---
 
-To further improve things, we can use aliases with NPM package and import maps to make it easier to update versions without the need to update and redeploy applications.
+Aliases can be used with application packages, NPM packages and import maps to make it easier to update versions without the need to update and redeploy applications.
 
 In the following example, the `@podium/browser` package will be set up as a dependency that multiple pages bundles can include without the module being inlined (and therefore duplicated).
 
@@ -58,31 +58,70 @@ eik map-alias my-map 1.0.0 1
 
 An alias for the import map `my-map` version `1.0.0` should now be available at `https://myeikserver.com/map/my-map/v1`
 
-## Package application code
+## Update eik.json
 
-Package application code giving the command the URL to the previously published import map alias URL.
+Enter the import map alias URL in `eik.json` so that plugins can use it to replace bare imports with Eik URLs.
 
-```sh
-eik package --name my-app --js ./scripts.js --map https://myeikserver.com/map/my-map/v1
+eik.json
+```json
+{
+    "server": "https://myeikserver.com",
+    "name": "my-app",
+    "version": "1.0.0",
+    "js": {
+        "./esm.js": "./bundle.js",
+        "./esm.js.map": "./bundle.js.map",
+    },
+    "import-map": "https://myeikserver.com/map/my-map/v1"
+}
 ```
 
-The application package `my-app` version `1.0.0` should now be available at `https://myeikserver.com/pkg/my-app/1.0.0`
+## Bundle local code (rollup example)
 
-## Alias application code
+This assumes you are already familiar with using Rollup and the instructions here only show how to augment an existing setup.
 
-Alias the application package for use in any script tags the application renders. This avoids the need to update the HTML whenever a new version of the application package is created.
+Add `@eik/rollup-plugin-import-map` to your rollup config file
 
 ```sh
-eik package-alias my-app 1.0.0 1
+npm install -D @eik/rollup-plugin-import-map
 ```
 
-An alias for the application package `my-app` version `1.0.0` should now be available at `https://myeikserver.com/pkg/my-app/v1`
+```js
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import eik from '@eik/rollup-plugin-import-map';
+
+export default {
+    input: './src/index.js',
+    output: {
+        file: './bundle.js',
+        format: 'es',
+        sourcemap: true,
+    },
+    plugins: [
+        eik(),
+        resolve(),
+        commonjs(),
+        babel(),
+    ],
+};
+```
+
+*n.b.* The `js` field in `eik.json` is set to read `bundle.js` which is produced by the rollup build.
+
+## publish bundled code to Eik server
+
+```sh
+eik package
+```
 
 ## Consuming an application bundle
 
-The aliased application bundle can be included in an HTML page using script tags like so
+The application bundle can be included in an HTML page using a script tag like so
 
 ```html
-<script src="https://myeikserver.com/pkg/my-app/v1/main/index.js" type="module" defer></script>
-<script src="https://myeikserver.com/pkg/my-app/v1/ie11/index.js" nomodule defer></script>
+<script src="https://myeikserver.com/pkg/my-app/1.0.0/esm.js" type="module" defer></script>
 ```
+
+Any bare references to `@podium/browser` will have been replaced with absolute URLs to the Eik server.
