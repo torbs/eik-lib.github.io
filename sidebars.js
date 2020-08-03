@@ -5,10 +5,11 @@ module.exports = {
     Client: [
       'client_installation',
       'client_login',
+      'client_eik_json',
       'client_app_packages',
       'client_npm_packages',
-      'client_aliases',
       'client_import_maps',
+      'client_aliases',
       'client_putting_it_all_together'
     ],
     Server: [
