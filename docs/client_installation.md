@@ -4,7 +4,7 @@ title: Client Installation
 sidebar_label: Installation
 ---
 
-In order to interact with an Eik server, you must install the client which can then be used to perform a variety of tasks such as mirroring NPM packages, publishing app packages, aliasing, publishing import maps and more. Interacting with the client is done via the command line in a terminal. To get started, you will need to have [Node.js](https://nodejs.org/en/) installed which comes with the [NPM](htps://npmjs.com) package manager.
+In order to interact with an Eik server, you must install the client which can then be used to perform a variety of tasks such as mirroring NPM packages, publishing app packages, aliasing, publishing import maps and more. Interacting with the client is done via the command line in a terminal. To get started, you will need to have [Node.js](https://nodejs.org/en/) installed which comes with the [NPM](https://npmjs.com) package manager.
 
 *N.B.* To use the client, you will need to know the address of an Eik server with which to interact. If you don't yet have a server to work with, please visit [the server docs](/docs/server) to get started configuring and running an Eik server.
 
