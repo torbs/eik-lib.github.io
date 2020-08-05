@@ -13,7 +13,7 @@ module.exports = {
         alt: 'Eik Logo',
         src: 'img/logo.svg',
       },
-      links: [
+      items: [
         {
           to: 'docs/overview',
           activeBasePath: 'docs',
