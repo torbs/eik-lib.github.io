@@ -25,8 +25,8 @@ Fill in the generated `eik.json` file with the necessary details.
 For the `server` property, you will need to have set up and know the address to, and Eik asset server.
 See [the server docs](/docs/server)
 
-Set the `js.input` and `css.input` properties of `assets.json` with paths to client side
-asset files in your project relative to the `assets.json` file.
+Set the `files` property of `eik.json` with paths to client side
+asset files in your project relative to the `eik.json` file.
 Eg. if you have a `scripts.js` file in an assets directory, the `js.input` value will be `assets/scripts.js`
 
 ### Step 2
@@ -116,7 +116,7 @@ Making use of import maps is done as follows.
 
 1. Define an import map json file
 2. Use the Eik CLI to upload the import map to the server
-3. Specify the URL to your import map file(s) in your `assets.json` file
+3. Specify the URL to your import map file(s) in your `eik.json` file
 4. Use the `publish` commands, your import maps will be used to map bare imports in your code to the URLs you have defined in your import maps
 
 #### Import maps, an example
@@ -138,7 +138,7 @@ The following command will upload the import map file `./import-map.json` in the
 eik map my-import-map 1.0.0 ./import-map.json
 ```
 
-Given the following line now added to `assets.json`
+Given the following line now added to `eik.json`
 
 ```json
 {
@@ -167,7 +167,7 @@ eik meta lodash 4.17.16
 
 | command    | aliases | description                                                     |
 | ---------- | ------- | --------------------------------------------------------------- |
-| init       | i       | Create an assets.json file in the current directory             |
+| init       | i       | Create an eik.json file in the current directory             |
 | login      |         | Authenticates client with eik server                            |
 | ping       |         | Pings eik server                                                |
 | publish    | p, pub  | Publish an app bundle                                           |
@@ -180,7 +180,7 @@ eik meta lodash 4.17.16
 
 #### init
 
-This command takes no input and creates a new `assets.json` file in the current directory with the following content:
+This command takes no input and creates a new `eik.json` file in the current directory with the following content:
 
 ```json
 {
@@ -200,7 +200,7 @@ This command takes no input and creates a new `assets.json` file in the current 
 
 You will then need to set the various fields as appropriate. If you are running a local asset server, the default server url should be `http://localhost:8080`.
 
-##### assets.json properties
+##### eik.json properties
 
 | property     | description                                                         |
 | ------------ | ------------------------------------------------------------------- |
@@ -212,7 +212,7 @@ You will then need to set the various fields as appropriate. If you are running 
 
 ###### name
 
-All asset uploads must have a name. When publishing a dependency from npm the name will be the package name taken from the module's `package.json` file. When publishing the assets for your app, the `name` field of your project's `assets.json` file is used.
+All asset uploads must have a name. When publishing a dependency from npm the name will be the package name taken from the module's `package.json` file. When publishing the assets for your app, the `name` field of your project's `eik.json` file is used.
 Names may contain any letters or numbers as well as the `-` and `_` characters.
 
 ```json
@@ -233,7 +233,7 @@ This is the address to the asset server you are using. This might be a locally r
 
 ###### js
 
-This field is used to configure bundling and publishing of JavaScript assets. Use `js.input` to configure the location on disk, relative to `assets.json`, where the entrypoint for your JavaScript client side assets are located.
+This field is used to configure bundling and publishing of JavaScript assets. Use `js.input` to configure the location on disk, relative to `eik.json`, where the entrypoint for your JavaScript client side assets are located.
 
 _scripts.js file inside assets folder_
 
@@ -247,7 +247,7 @@ _scripts.js file inside assets folder_
 
 ###### css
 
-This field is used to configure bundling and publishing of CSS assets. Use `css.input` to configure the location on disk, relative to `assets.json`, where the entrypoint for your CSS client side assets are located.
+This field is used to configure bundling and publishing of CSS assets. Use `css.input` to configure the location on disk, relative to `eik.json`, where the entrypoint for your CSS client side assets are located.
 
 _styles.css file inside assets folder_
 
@@ -273,7 +273,7 @@ _defining a single import map file_
 
 #### login
 
-Authenticate with the configured Eik server. The `server` field in `assets.json` will be used to determine which server to authenticate with. It is also possible to set the server without the need for an `assets.json`
+Authenticate with the configured Eik server. The `server` field in `eik.json` will be used to determine which server to authenticate with. It is also possible to set the server without the need for an `eik.json`
 file using the command line flag `--server` or `-s`
 
 The command takes the form:
@@ -310,7 +310,7 @@ eik ping
 
 #### publish
 
-This command publishes the app's client side assets to an Eik server based on the values in an `assets.json` file in the current directory.
+This command publishes the app's client side assets to an Eik server based on the values in an `eik.json` file in the current directory.
 
 The command takes the form:
 
@@ -330,7 +330,7 @@ eik publish
 
 This command will download the specified (by name and version) package from NPM, create a bundle with it and then publish it to the Eik server. The resulting bundle will be in esm module format, converting from common js if needed.
 
-_Note_ The arguments `server` and `import-map` are taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify these values with the command line flags `--server` and `--map`.
+_Note_ The arguments `server` and `import-map` are taken from `eik.json` if such a file is present in the current directory. If not, you will need to specify these values with the command line flags `--server` and `--map`.
 
 The command takes the form:
 
@@ -351,7 +351,7 @@ eik dependency lit-html 1.1.2
 
 This command creates a semver alias for a given published bundle. Creating aliases allows for more flexible referencing of published bundles. You can update an alias to point to the latest version of a bundle without needing to update every client that makes use of your bundle.
 
-_Note_ The `server` argument is taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify this values with the command line flag `--server`.
+_Note_ The `server` argument is taken from `eik.json` if such a file is present in the current directory. If not, you will need to specify this values with the command line flag `--server`.
 
 The command takes the form:
 
@@ -383,7 +383,7 @@ This command uploads an import map json file you have created locally to the ser
 }
 ```
 
-_Note_ The argument `server` is taken from `assets.json` if such a file is present in the current directory. If not, you will need to specify this value with the command line flag `--server`.
+_Note_ The argument `server` is taken from `eik.json` if such a file is present in the current directory. If not, you will need to specify this value with the command line flag `--server`.
 
 The command takes the form:
 

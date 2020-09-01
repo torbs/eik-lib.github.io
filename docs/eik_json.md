@@ -13,8 +13,10 @@ Eik packaging is configured by way of a JSON meta file called `eik.json`. Any pr
   "name": "my-app",
   "version": "1.0.0",
   "server": "https://assets.myeikserver.com",
-  "js": "./scripts.js",
-  "css": "./styles.css",
+  "files": {
+    "index.js": "./scripts.js",
+    "index.css": "./styles.css"
+  },
   "import-map": "https://assets.myeikserver.com/map/my-map/1.0.0"
 }
 ```
@@ -36,8 +38,7 @@ Once generated, it's necessary to add information about the Eik server URL for t
   "name": "",
   "version": "1.0.0",
   "server": "",
-  "js": "",
-  "css": ""
+  "files": {},
 }
 ```
 
@@ -75,87 +76,40 @@ Defines the location of the Eik server that the project will publish to.
 
 See the [server docs](/docs/server) for how to setup and configure an Eik server.
 
-### js
+### files
 
-* optional but one of either js or css must be provided
+* required
 
-Defines JavaScript file entrypoints to publish. This can be a string defining a single entrypoint or it can be a object that maps publish paths to local file system file locations. 
+Defines JavaScript and CSS file entrypoints to publish. This can be a string defining a single entrypoint or it can be an object that maps publish paths to local file system file locations. 
 
 See [application packages](/docs/client_app_packages) for more information.
 
-#### Basic string entrypoints
-
-A single string with the path to a JavaScript file to be included when publishing.
-
-The following defines a single JavaScript entrypoint at `./scripts.js` that will be published to the Eik server and subsequently be available at `/pkg/<name>/<version>/index.js`.
-
-```json
-{
-  "js": "./scripts.js",
-}
-```
-
 #### Entrypoint file mappings
 
-An object can be provided to define any number of JavaScript files to be included when publishing. Object keys define publish locations on the Eik server and object values define the local file entrypoint locations. This aligns fairly well with [ESM package entrypoints](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_package_entry_points) in Node.js
+An object must be provided to define any number of JavaScript files to be included when publishing. Object keys define publish locations on the Eik server and object values define the local file entrypoint locations. This aligns somewhat loosely with [ESM package entrypoints](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_package_entry_points) in Node.js
 
-The following defines several JavaScript entrypoints and their locations on the server where they will be published to. 
+The following defines several JavaScript and CSS entrypoints and their locations on the server where they will be published to. 
 
 ```json
 {
-  "js": {
+  "files": {
     "./esm.js": "./esm.js",
     "./esm.js.map": "./esm.js.map",
     "./ie11.js": "./ie11.js",
     "./ie11.js.map": "./ie11.js.map",
-  }
-}
-```
-
-This will result in 4 files at the following locations:
-
-* `/pkg/<name>/<version>/esm.js`
-* `/pkg/<name>/<version>/esm.js.map`
-* `/pkg/<name>/<version>/ie11.js`
-* `/pkg/<name>/<version>/ie11.js.map`
-
-See [application packages](/docs/client_app_packages) for more information.
-
-### css
-
-* optional but one of either js or css must be provided
-
-Defines CSS file entrypoints to publish. This can be a string defining a single entrypoint or it can be a object that maps publish paths to local file system file locations. 
-
-#### Basic string entrypoints
-
-A single string with the path to a CSS file to be included when publishing.
-
-The following defines a single CSS entrypoint at `./styles.css` that will be published to the Eik server and subsequently be available at `/pkg/<name>/<version>/index.css`.
-
-```json
-{
-  "css": "./styles.css",
-}
-```
-
-#### Entrypoint file mappings
-
-An object can be provided to define any number of CSS files to be included when publishing. Object keys define publish locations on the Eik server and object values define the local file entrypoint locations. This aligns fairly well with [ESM package entrypoints](https://nodejs.org/dist/latest-v14.x/docs/api/esm.html#esm_package_entry_points) in Node.js
-
-The following defines several CSS entrypoints and their locations on the server where they will be published to. 
-
-```json
-{
-  "js": {
     "./styles.css": "./styles.css",
     "./styles.css.map": "./styles.css.map",
   }
 }
 ```
 
-This will result in 2 files at the following locations:
+This will result in 7 files at the following locations:
 
+* `/pkg/<name>/<version>/eik.json`
+* `/pkg/<name>/<version>/esm.js`
+* `/pkg/<name>/<version>/esm.js.map`
+* `/pkg/<name>/<version>/ie11.js`
+* `/pkg/<name>/<version>/ie11.js.map`
 * `/pkg/<name>/<version>/styles.css`
 * `/pkg/<name>/<version>/styles.css.map`
 

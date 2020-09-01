@@ -68,7 +68,7 @@ eik.json
     "server": "https://myeikserver.com",
     "name": "my-app",
     "version": "1.0.0",
-    "js": {
+    "files": {
         "./esm.js": "./bundle.js",
         "./esm.js.map": "./bundle.js.map",
     },

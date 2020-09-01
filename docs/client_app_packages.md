@@ -12,29 +12,18 @@ Use the `package` command to package and upload local JavaScript and CSS bundle 
 
 ### eik.json definitions
 
-In your app's `eik.json` file, you can use the `js` and `css` keys to define local file paths to be included when packaging. One or both of `js` and `css` must be defined and the definitions can be either a string path or an object that maps URL paths to local filesystem entrypoint paths.
+In your app's `eik.json` file, you use the `files` key to define local file paths to be included when packaging.
 
-#### string entrypoints
-
-```json
-{
-    "js": "./scripts.js",
-    "css": "./styles.css",
-}
-```
-
-#### object entrypoints
+#### file entrypoints
 
 ```json
 {
-    "js": {
+    "files": {
         "./scripts.js": "./scripts.js",
         "./scripts.js.map": "./scripts.js.map",
-    },
-    "css": {
         "./styles.css": "./styles.css",
         "./styles.css.map": "./styles.css.map",
-    },
+    }
 }
 ```
 
@@ -48,9 +37,9 @@ eik package
 
 Once uploaded, the archive will be unpacked and the files served at the appropriate paths.
 
-Some examples of how entrypoint definitions correspond to final file locations:
+The following example shows how entrypoint definitions correspond to final file locations:
 
-#### Example 1.
+#### Example.
 
 *eik.json*
 
@@ -59,43 +48,28 @@ Some examples of how entrypoint definitions correspond to final file locations:
     "server": "http://assets.myserver.com",
     "name": "my-pack",
     "version": "1.0.0",
-    "js": "./scripts.js",
-    "css": "./styles.css",
+    "files": {
+        "index.js": "./scripts.js",
+        "index.js.map": "./scripts.js.map",
+        "ie11.js": "./scripts-fallback.js",
+        "ie11.js.map": "./scripts-fallback.js.map",
+        "index.css": "./styles.css",
+        "index.css.map": "./styles.css.map"
+    }
 }
+```
+
+*command*
+
+```sh
+eik package
 ```
 
 *URLs after packaging*
 
 * `http://assets.myserver.com/pkg/my-pack/1.0.0/index.js`
-* `http://assets.myserver.com/pkg/my-pack/1.0.0/index.css`
-
-#### Example 2.
-
-*eik.json*
-
-```json
-{
-    "server": "http://assets.myserver.com",
-    "name": "my-pack",
-    "version": "1.0.0",
-    "js": { 
-        "./esm.js": "./scripts.js",
-        "./esm.js.map": "./scripts.js.map",
-        "./ie11.js": "./scripts-fallback.js",
-        "./ie11.js.map": "./scripts-fallback.js.map",
-    },
-    "css": {
-        "./styles.css": "./styles.css",
-        "./styles.css.map": "./styles.css.map",
-    }
-}
-```
-
-*URLs after packaging*
-
-* `http://assets.myserver.com/pkg/my-pack/1.0.0/esm.js`
-* `http://assets.myserver.com/pkg/my-pack/1.0.0/esm.js.map`
+* `http://assets.myserver.com/pkg/my-pack/1.0.0/index.js.map`
 * `http://assets.myserver.com/pkg/my-pack/1.0.0/ie11.js`
 * `http://assets.myserver.com/pkg/my-pack/1.0.0/ie11.js.map`
-* `http://assets.myserver.com/pkg/my-pack/1.0.0/styles.css`
-* `http://assets.myserver.com/pkg/my-pack/1.0.0/styles.css.map`
+* `http://assets.myserver.com/pkg/my-pack/1.0.0/index.css`
+* `http://assets.myserver.com/pkg/my-pack/1.0.0/index.css.map`
