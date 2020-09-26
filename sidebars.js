@@ -1,7 +1,9 @@
 
 module.exports = {
-  someSidebar: {
-    Overview: ['overview'],
+  mainSidebar: {
+    Overview: [
+      'overview'
+    ],
     Client: [
       'client_installation',
       'client_login',
