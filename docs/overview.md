@@ -18,7 +18,7 @@ Let's also say that all of these applications are using [lit-html](https://lit-h
 
 Our challenge is to avoid the end user having to end up downloading different versions of the same library as they move between the different applications on our site. We want to maximize end user performance by downloading lit-html once and not having to download one specific version when accessing `site.com` (eg. v1.2.0) and then downloading another specific version (eg. v1.1.1) when moving to `site.com/shop` and finally ending up with perhaps having to download yet another version (eg. v1.1.2) when they check out at `site.com/checkout`.
 
-The solution is to make all applications point to the same version of the same library in production despite that the applications is developed using different patch or minor version. If the library then has appropiate http cache headers, the browser will do the rest and make sure the libary is loaded over the wire only once during the users visit to our site.
+The Eik solution is to make all applications point to the same version of the same library in production despite that the applications are developed using different patch or minor version. If the library then has appropriate HTTP cache headers, the browser will do the rest and make sure the library is loaded over the wire only once during the user's visit to our site.
 
 Though; applying such a solution is easier said than done in many cases. This is what Eik
 helps with.
