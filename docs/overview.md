@@ -96,7 +96,7 @@ Next, we need to create a mapping between the bare import statement developers w
 }
 ```
 
-When created we publish this Import Map to our Eik server and we create an alias for it. If we named the Import Map "site-mapping" and versioned it as 1.0.1 during upload to the Eik server, it will now be available on the alias `https://eik-server.com/map/site-mapping/v1`.
+Once created, we publish this Import Map to our Eik server and then create an alias for it. If we were to name the Import Map "site-mapping" and versioned it as 1.0.1 during the upload to the Eik server, it would then be available at the alias URL `https://eik-server.com/map/site-mapping/v1`.
 
 In each application we can now depend on and install lit-html through NPM as many projects already do. Each application can now locally be developed by refering lit-html through its bare import statement:
 
