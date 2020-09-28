@@ -76,7 +76,7 @@ An Import Map looks something like this:
 
 Eik has support for storing Import Maps under a dedicated namespace. Import Maps are versioned and immutable and can be aliased in the same way that assets can.
 
-Eik come with the feature to apply Image Maps to uploaded packages of assets to Eik.
+Eik comes with a feature to apply Import Maps to Eik packages during bundling.
 
 ## How it all play together
 
