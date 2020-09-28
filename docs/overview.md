@@ -57,7 +57,7 @@ Due to the prevalence of asset bundling, it's very common to see ESM import stat
 import * as mylib from 'my_library';
 ```
 
-These are called bare imports and are not legal ESM import statements. A browser can not handle such an import statement. Bare import statements are commonly used when a module is installed through a package manager, such as NPM, and then transpiled through a build step to one of the legal ESM import statements before served to a browser.
+These type of statements are called "bare imports" and are not legal ESM import statements. A browser can not handle such an import statement. Bare import statements are commonly used when a module is installed through a package manager, such as NPM, and then transpiled through a build step to one of the legal ESM import statements before being served to the browser.
 
 In Eik, we utilize bare imports. Which brings us to Import Maps.
 
