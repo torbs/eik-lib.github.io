@@ -14,7 +14,7 @@ In a moderate or large sized web site it is very common that the site is built a
 
 Lets say we have a site where the frontpage (`site.com`) is one application. Then we have a web shop, a second application, on `site.com/shop` and finally there is a third application handling checkout on `site.com/checkout`. 
 
-Lets also say that all of these applications is using [lit-html](https://lit-html.polymer-project.org/) to do templating in the browser. We then have different applications depending on the same library and we want to be in a position where each applications is developed and deployed to production in an autonomous manner. Due to the autonomous manner each application might depend on different versions of the same library. 
+Let's also say that all of these applications are using [lit-html](https://lit-html.polymer-project.org/) for templating in the browser. We then have different applications depending on the same library that we want to be developed and deployed to production autonomously. Problems can arise when some of these application start to depend on different versions of the same library.
 
 Our challenge is to avoid that the end user ends up downloading the same library at different versions when moving between the different applications on our site. We want to maximize end user performance by downloading lit-html once and not having to download ex lit-html version 1.2.0 when accessing `site.com` and then downloading ex version 1.1.1 when moving to `site.com/shop` and finally ending up with perhaps having to download ex version 1.1.2 when checking out at `site.com/checkout`.
 
