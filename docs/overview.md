@@ -45,7 +45,7 @@ import * as mymod from './my_module.js';
 import * as mymod from '../my_module.js';
 ```
 
-ESM import statements can also be absolute and must start with a http protocol:
+ESM import statements can also be absolute in which case they must start with an HTTP protocol:
 
 ```js
 import * as mylib from 'https://eik-server.com/pkg/mylib/v3/main.js';
