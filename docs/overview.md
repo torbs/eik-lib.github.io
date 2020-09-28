@@ -80,7 +80,7 @@ Eik comes with a feature to apply Import Maps to Eik packages during bundling.
 
 ## How it all works together
 
-In Eik we use Import Maps and aliasing of assets to align the version of libraries accross multiple applications on a site while maintaining the posibillity to develop and deploy each application to production separately.
+In Eik, we use Import Maps and aliasing of assets to align the versions of libraries across multiple applications on a site while maintaining the possibility to develop and deploy each application to production separately.
 
 Lets go through this with our challenge outlined in the above introduction:
 
