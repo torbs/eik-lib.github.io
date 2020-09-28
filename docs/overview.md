@@ -25,7 +25,7 @@ The Eik solution is to make all applications point to the same version of the sa
 
 The main role of the Eik server is to serve static assets uploaded to the server. Upon upload, assets will be given a new versioned pathname for each upload and are considered imutable. A change in an asset is a new version on the Eik server. By doing so, served assets can be cached forever in the end users browser.
 
-The Eik server also has a concept called an alias. An alias is an non imutable pahname which can be set to redirect requests to it, to an imutable asset pathname. 
+The Eik server also has the concept called an alias. An alias is a non immutable pathname which can be set to redirect requests to it, to an immutable asset pathname. 
 
 Example: Lets say we upload lit-html version 1.1.1 to a Eik server. This version of lit-html will then live on the imutable URL `/npm/lit-html/1.1.1`. We can then set an alias for lit-html and this alias will be on the non imutable pathname `/npm/lit-html/v1`. Any request to any file under the alias at `/npm/lit-html/v1` we will then be redirected to the matching file under `/npm/lit-html/1.1.1`.
 
