@@ -88,7 +88,7 @@ We know that lit-html is a library all our applications will be using so we want
 
 To make the reference to lit-html more static over time we create an alias to point to version 1.2.0 and lit-html can be requested through `https://eik-server.com/npm/lit-html/v1`. As mentioned earlier, this give us the posibillity to bump versions of lit-html without having to rebuild and redeploy each of our applications to production.
 
-Then we need to create a mapping between the bare import statement developers will use when developing the applications and the aliased URL of lit-html. We do so by making an Import Map as follow:
+Next, we need to create a mapping between the bare import statement developers will use when developing the applications and the aliased URL of lit-html. We can do so by making an Import Map as follow:
 
 ```json
 {
