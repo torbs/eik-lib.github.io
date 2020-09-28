@@ -82,7 +82,7 @@ Eik comes with a feature to apply Import Maps to Eik packages during bundling.
 
 In Eik, we use Import Maps and aliasing of assets to align the versions of libraries across multiple applications on a site while maintaining the possibility to develop and deploy each application to production separately.
 
-Lets go through this with our challenge outlined in the above introduction:
+Let's go through this, keeping in mind the challenge we outlined in the introduction above.
 
 We know that lit-html is a library all our applications will be using so we want to align the version accross our applications. To do so, we publish a version 1.2.0 of lit-html to our Eik server and it is then available at `https://eik-server.com/npm/lit-html/1.2.0`.
 
