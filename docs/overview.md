@@ -110,4 +110,4 @@ When an application is ready to be put into production, the frontend code should
 import * as lit from '/npm/lit-html/v1';
 ```
 
-Now our applications use a ESM import statement pointing to the alias for lit-html which makes sure multiple applications on our site align to the same version of lit-html. While doing so, we've also been able to develop our application in isolation without depending or interfering with other applications utlilizing the same library.
+Our application defines an ESM import statement that points to the alias for lit-html which makes sure multiple applications on our site align to the same version of lit-html. By doing this, we're able to develop our application in isolation without depending or interfering with any other applications that utilise the same library.
