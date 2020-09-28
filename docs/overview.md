@@ -29,7 +29,7 @@ The Eik server also has the concept called an alias. An alias is a non immutable
 
 For example, let us say that we upload lit-html version 1.1.1 to an Eik server. This version of lit-html will then live on the immutable URL `/npm/lit-html/1.1.1`. We can then set an alias for lit-html and this alias will be on the non immutable pathname `/npm/lit-html/v1`. Any request to any file under the alias at `/npm/lit-html/v1` we will then be redirected to the matching file under `/npm/lit-html/1.1.1`.
 
-Later on we publish lit-html version 1.2.0 to the Eik server. This version will then live on the imutable pathname `/npm/lit-html/1.2.0`. We can then update the existing alias at the non imutable pathname `/npm/lit-html/v1` to point to the new version. Requests to any file under the alias at `/npm/lit-html/v1` will then be redirected to its matching file under `/npm/lit-html/1.2.0`.
+Later on, when we publish lit-html version 1.2.0 to the Eik server, this version will then live on the immutable pathname `/npm/lit-html/1.2.0`. We can then update the existing alias at the non imutable pathname `/npm/lit-html/v1` to point to the new version. Requests to any file under the alias at `/npm/lit-html/v1` will then be redirected to its matching file under `/npm/lit-html/1.2.0`.
 
 In our challenge outlined in the above introduction each of the applications described can load lit-html through its alias (`/npm/lit-html/v1`) and they will all load the same version of lit-html. The alias acts as a static path to a shared library, lit-html, accross the applications. It is now possible to bump new versions of a library without having to rebuild and redeploy each applicaion to production. 
 
