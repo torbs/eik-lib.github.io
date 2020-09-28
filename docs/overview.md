@@ -86,7 +86,7 @@ Let's go through this, keeping in mind the challenge we outlined in the introduc
 
 We know that lit-html is a library that all our applications will be using so we want to align the version in use across all of them. To do so, we publish version 1.2.0 of lit-html to our Eik server after which time it will be available at `https://eik-server.com/npm/lit-html/1.2.0`.
 
-To make the reference to lit-html more static over time we create an alias to point to version 1.2.0 and lit-html can be requested through `https://eik-server.com/npm/lit-html/v1`. As mentioned earlier, this give us the posibillity to bump versions of lit-html without having to rebuild and redeploy each of our applications to production.
+To make the reference to lit-html more static over time we create an alias to point to version 1.2.0 and lit-html can be requested through `https://eik-server.com/npm/lit-html/v1`. As mentioned earlier, this give us the possibillity to update versions of lit-html without having to rebuild and redeploy each of our applications to production.
 
 Next, we need to create a mapping between the bare import statement developers will use when developing the applications and the aliased URL of lit-html. We can do so by making an Import Map as follow:
 
