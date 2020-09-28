@@ -35,7 +35,7 @@ In order to meet the challenge outlined in the introduction above, each of the a
 
 ## ESM imports 
 
-Before we proceed we need to highlight some ECMA Script Module (ESM) import statement basics. 
+Before we proceed, we should go over some ECMA Script Module (ESM) import statement basics. 
 
 ESM import statements can be relative. A relative ESM import statement must start with either `/`, `./` or `../`:
 
