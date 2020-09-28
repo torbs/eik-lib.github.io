@@ -20,7 +20,6 @@ Our challenge is to avoid the end user having to end up downloading different ve
 
 The Eik solution is to make all applications point to the same version of the same library in production despite that the applications are developed using different patch or minor version. If the library then has appropriate HTTP cache headers, the browser will do the rest and make sure the library is loaded over the wire only once during the user's visit to our site.
 
-Though; applying such a solution is easier said than done in many cases. This is what Eik
 helps with.
 
 ## How Eik works
