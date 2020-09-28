@@ -51,7 +51,7 @@ ESM import statements can also be absolute in which case they must start with an
 import * as mylib from 'https://eik-server.com/pkg/mylib/v3/main.js';
 ```
 
-Though; its very common to see ESM import statements which does not apply to any of these (note that `my_library` does not start with `/`, `./` or `../`):
+Due to the prevalence of asset bundling, it's very common to see ESM import statements which do not comply with any of the statements outlined above (note that `my_library` does not start with `/`, `./` or `../`):
 
 ```js
 import * as mylib from 'my_library';
