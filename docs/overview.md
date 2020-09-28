@@ -104,7 +104,7 @@ In each application we can now depend on and install lit-html through NPM as is 
 import * as lit from 'lit-html';
 ```
 
-When an application is ready to be put into production, the frontend code should be uploaded as a package to the Eik server too. Upon preparation of our application to upload to the Eik server we will apply our Import Map. This will transform our bare import statements to a legal ESM import statement pointing to the lit-html alias defined in the Import Map:
+When an application is ready to be put into production, the frontend code should be uploaded as a package to the Eik server. When preparing our application for upload to the Eik server we will apply our Import Map. This will transform our bare import statements into legal ESM import statement pointing to the lit-html alias defined in the Import Map:
 
 ```js
 import * as lit from '/npm/lit-html/v1';
