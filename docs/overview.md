@@ -10,7 +10,7 @@ Eik is an [asset server](/docs/server) for serving ESM and CSS assets. The Eik s
 
 To understand Eik we need to understand what we are trying to achieve so lets start with a fairly common issue:
 
-In a moderate or large sized web site it is very common that the site is built and served as [multiple applications](https://martinfowler.com/articles/microservices.html) which live on different pathnames on the site. Its also common that each of these applications have a dedicated team of developers and the goal of these teams is to be as autonomous as possible. To be as autonomous as possible, each application and team would like to depend on each other as little as possible.
+In a moderate or large sized web site it is very common that the site is built and served as [multiple applications](https://martinfowler.com/articles/microservices.html) which live at different pathnames on the site. It's also common for each of these applications to have a dedicated team of developers with the goal of being as autonomous as possible. To achieve this, each application and team should depend on each other as little as possible.
 
 Lets say we have a site where the frontpage (`site.com`) is one application. Then we have a web shop, a second application, on `site.com/shop` and finally there is a third application handling checkout on `site.com/checkout`. 
 
