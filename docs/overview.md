@@ -63,7 +63,7 @@ In Eik, we utilize bare imports. Which brings us to Import Maps.
 
 ## Import Maps
 
-Import Maps is a fairly new and to become web standard. Shortly explained a Import Map is a simple mapping, in form of a object, between a bare import statement to a legal ESM import statement. The idea is that an Import Map should be used to translate bare import statements to fully qualified import statements in ESM modules.
+Import Maps are a fairly new and up and coming web standard. An Import Map is a simple object mapping between a bare import statement and a legal ESM import statement. The idea is that an Import Map should be used to translate bare import statements to fully qualified import statements in ESM modules.
 
 An Import Map looks something like this:
 
