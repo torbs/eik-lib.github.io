@@ -84,7 +84,7 @@ In Eik, we use Import Maps and aliasing of assets to align the versions of libra
 
 Let's go through this, keeping in mind the challenge we outlined in the introduction above.
 
-We know that lit-html is a library all our applications will be using so we want to align the version accross our applications. To do so, we publish a version 1.2.0 of lit-html to our Eik server and it is then available at `https://eik-server.com/npm/lit-html/1.2.0`.
+We know that lit-html is a library that all our applications will be using so we want to align the version in use across all of them. To do so, we publish version 1.2.0 of lit-html to our Eik server after which time it will be available at `https://eik-server.com/npm/lit-html/1.2.0`.
 
 To make the reference to lit-html more static over time we create an alias to point to version 1.2.0 and lit-html can be requested through `https://eik-server.com/npm/lit-html/v1`. As mentioned earlier, this give us the posibillity to bump versions of lit-html without having to rebuild and redeploy each of our applications to production.
 
