@@ -4,7 +4,7 @@ title: Overview
 sidebar_label: Overview
 ---
 
-Eik is an [asset server](/docs/server) for serving ESM and CSS assets. The Eik server can run and be integrated with your own infrastructure. Eik comes with a [client](/docs/client) for easy upload and management of your assets.
+Eik consist of 3 main parts. First of all Eik is an [asset server](/docs/server) for serving [ECMA Script Modules (ESM)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) and CSS assets. The second part of Eik is a [client](/docs/client) for easy upload and management of your assets to the Eik server. The third part is a set of mapping utils one can plug into build tools to map assets on the Eik server with each other.
 
 ## Introduction
 
@@ -27,7 +27,7 @@ The main role of the Eik server is to serve static assets uploaded to the server
 
 The Eik server also has the concept called an alias. An alias is a non immutable pathname which can be set to redirect requests to it, to an immutable asset pathname. 
 
-For example, let us say that we upload lit-html version 1.1.1 to an Eik server. This version of lit-html will then live on the immutable URL `/npm/lit-html/1.1.1`. We can then set an alias for lit-html and this alias will be on the non immutable pathname `/npm/lit-html/v1`. Any request to any file under the alias at `/npm/lit-html/v1` we will then be redirected to the matching file under `/npm/lit-html/1.1.1`.
+For example, let us say that we upload lit-html version 1.1.1 to an Eik server. This version of lit-html will then live on the immutable URL `/npm/lit-html/1.1.1`. We can then set an alias for lit-html and this alias will be on the non immutable pathname `/npm/lit-html/v1`. Any request to any file under the alias at `/npm/lit-html/v1` will then be redirected to the matching file under `/npm/lit-html/1.1.1`.
 
 Later on, when we publish lit-html version 1.2.0 to the Eik server, this version will then live on the immutable pathname `/npm/lit-html/1.2.0`. We can then update the existing alias at the non imutable pathname `/npm/lit-html/v1` to point to the new version. Requests to any file under the alias at `/npm/lit-html/v1` will then be redirected to its matching file under `/npm/lit-html/1.2.0`.
 
@@ -35,7 +35,7 @@ In order to meet the challenge outlined in the introduction above, each of the a
 
 ## ESM imports 
 
-Before we proceed, we should go over some ECMA Script Module (ESM) import statement basics. 
+Before we proceed, we should go over some ESM import statement basics. 
 
 ESM import statements can be relative. A relative ESM import statement must start with either `/`, `./` or `../`:
 
@@ -59,11 +59,11 @@ import * as mylib from 'my_library';
 
 These type of statements are called "bare imports" and are not legal ESM import statements. A browser can not handle such an import statement. Bare import statements are commonly used when a module is installed through a package manager, such as NPM, and then transpiled through a build step to one of the legal ESM import statements before being served to the browser.
 
-In Eik, we utilize bare imports. Which brings us to Import Maps.
+In Eik, we utilize bare imports to align modules (ex; the applications in our example) to the same version of modules it depends on (ex; lit-html in our example). Which brings us to Import Maps.
 
 ## Import Maps
 
-Import Maps are a fairly new and up and coming web standard. An Import Map is a simple object mapping between a bare import statement and a legal ESM import statement. The idea is that an Import Map should be used to translate bare import statements to fully qualified import statements in ESM modules.
+Import Maps are a fairly new and up and coming web standard. An Import Map is a simple object mapping between a bare import statement and a legal ESM import statement. The idea is that an Import Map should be used to map bare import statements to fully qualified import statements in ESM.
 
 An Import Map looks something like this:
 
@@ -76,9 +76,9 @@ An Import Map looks something like this:
 
 Eik has support for storing Import Maps under a dedicated namespace. Import Maps are versioned and immutable and can be aliased in the same way that assets can.
 
-Eik comes with a feature to apply Import Maps to Eik packages during bundling.
+Eik's mapping utils is used to apply Import Maps to assets during bundling.
 
-## How it all works together
+## Mapping it together
 
 In Eik, we use Import Maps and aliasing of assets to align the versions of libraries across multiple applications on a site while maintaining the possibility to develop and deploy each application to production separately.
 
@@ -104,10 +104,12 @@ In each application we can now depend on and install lit-html through NPM as is 
 import * as lit from 'lit-html';
 ```
 
-When an application is ready to be put into production, the frontend code should be uploaded as a package to the Eik server. When preparing our application for upload to the Eik server we will apply our Import Map. This will transform our bare import statements into legal ESM import statement pointing to the lit-html alias defined in the Import Map:
+In the build tool used by the applications we can now add the appropiate Eik mapping utility which will read a set of defined Import Maps (in our example, "site-mapping") from the Eik server and apply these Import Maps to the application code. This will map our bare import statements into legal ESM import statements pointing to the lit-html alias defined in the Import Map:
 
 ```js
 import * as lit from '/npm/lit-html/v1';
 ```
 
-Our application defines an ESM import statement that points to the alias for lit-html which makes sure multiple applications on our site align to the same version of lit-html. By doing this, we're able to develop our application in isolation without depending or interfering with any other applications that utilise the same library.
+Now our application defines an ESM import statement that points to the alias for lit-html which makes sure multiple applications on our site align to the same version of lit-html. By doing this, we're able to develop our application in isolation without depending or interfering with any other applications that utilise the same library.
+
+The final step in this process is uploading the application code as a package to the Eik server. Which is done by the Eik client.
