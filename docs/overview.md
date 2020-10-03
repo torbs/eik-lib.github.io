@@ -63,14 +63,14 @@ In Eik, we utilize bare imports to align modules (ex; the applications in our ex
 
 ## Import Maps
 
-Import Maps are a fairly new and up and coming web standard. An Import Map is a simple object mapping between a bare import statement and a legal ESM import statement. The idea is that an Import Map should be used to map bare import statements to fully qualified import statements in ESM.
+[Import Maps](https://github.com/WICG/import-maps) is fairly new and up and coming web standard. An Import Map is a simple object mapping between a bare import statement and a legal ESM import statement. The idea is that an Import Map should be used to map bare import statements to fully qualified import statements in ESM.
 
 An Import Map looks something like this:
 
 ```json
 {
     "my_library": "https://eik-server.com/pkg/mylib/v3/main.js",
-    "lit-html": "https://eik-server.com/npm/lit-html/v1/"
+    "lit-html": "https://eik-server.com/npm/lit-html/v1/lit-html.js"
 }
 ```
 
@@ -92,7 +92,7 @@ Next, we need to create a mapping between the bare import statement developers w
 
 ```json
 {
-    "lit-html": "/npm/lit-html/v1"
+    "lit-html": "/npm/lit-html/v1/lit-html.js"
 }
 ```
 
@@ -101,15 +101,15 @@ Once created, we publish this Import Map to our Eik server and then create an al
 In each application we can now depend on and install lit-html through NPM as is common practice. Each application can then locally reference lit-html through its bare import statement like so:
 
 ```js
-import * as lit from 'lit-html';
+import {html, render} from 'lit-html'
 ```
 
-In the build tool used by the applications we can now add the appropiate Eik mapping utility which will read a set of defined Import Maps (in our example, "site-mapping") from the Eik server and apply these Import Maps to the application code. This will map our bare import statements into legal ESM import statements pointing to the lit-html alias defined in the Import Map:
+In the build tool used by the applications we can now add the appropriate Eik mapping utility which will read a set of defined Import Maps (in our example, "site-mapping") from the Eik server and apply these Import Maps to the application code. This will map our bare import statements into legal ESM import statements pointing to the lit-html alias defined in the Import Map:
 
 ```js
-import * as lit from '/npm/lit-html/v1';
+import * as lit from '/npm/lit-html/v1/lit-html.js';
 ```
 
-Now our application defines an ESM import statement that points to the alias for lit-html which makes sure multiple applications on our site align to the same version of lit-html. By doing this, we're able to develop our application in isolation without depending or interfering with any other applications that utilise the same library.
+Now our application defines an ESM import statement that points to the alias for lit-html which makes sure multiple applications on our site align to the same version of lit-html. By doing this, we're able to develop our application in isolation without depending or interfering with any other applications that utilize the same library.
 
 The final step in this process is uploading the application code as a package to the Eik server. Which is done by the Eik client.

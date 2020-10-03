@@ -4,6 +4,11 @@ module.exports = {
     Overview: [
       'overview'
     ],
+    Mapping: [
+      'mapping_import_map',
+      'mapping_browser',
+      'mapping_plugins'
+    ],
     Client: [
       'client_installation',
       'client_login',
