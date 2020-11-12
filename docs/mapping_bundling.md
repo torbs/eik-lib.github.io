@@ -89,7 +89,7 @@ Libraries that are published to both eik and npm need should use this setup (thi
   "scripts": {
     "prebuild": "npx rimraf dist/** dist-eik/**",
     "build": "npm run build:dist && npm run build:dist-eik",
-    "build:dist": "microbundle src/index.ts -o ./dist/index.js -f cjs && microbundle src/index.ts -o ./dist/index.es.js -f esm --no-pkg-main",
+    "build:dist": "microbundle src/index.ts -o ./dist/index.js -f cjs && microbundle src/index.ts -o ./dist/index.esm.js -f esm --no-pkg-main",
     "build:dist-eik": "microbundle src/index.ts -o ./dist-eik/esm.js --no-pkg-main -f modern && microbundle src/index.ts -o ./dist-eik/ie11.js --no-pkg-main -f iife",
     "publish:eik": "eik login -k $EIK_SERVER_KEY && eik publish"
   },
