@@ -23,5 +23,9 @@ module.exports = {
       'server_file_structure',
       'server_metrics',
     ],
+    'CI Setup': [
+      'ci',
+      'travis'
+    ]
   },
 };
