@@ -24,7 +24,7 @@ Since we intend to one day delete our fork, we use the same name for our binary 
 microbundle --help
 ```
 
-Beyond implementing the rollup and postcss plugins for eik import mapping, there are some differences in our fork from the original. Pay attention to the readme for eik microbundle for up to date information on those.
+Beyond implementing the rollup plugin for eik import mapping, there are some differences in our fork from the original. Pay attention to the readme for eik microbundle for up to date information on those.
 
 ## Bundling applications
 
@@ -33,10 +33,10 @@ For these use cases we can use the simple setup, given this `package.json`:
 
 ```json
 {
-  "esmodule": "dist/esm.js",
-  "nomodule": "dist/ie11.js",
   "scripts": {
-    "build": "microbundle src/assets/client.js"
+    "build": "npm run build:esm && npm run build:ie11",
+    "build:esm": "microbundle index.js -o dist/esm.js --no-pkg-main --import-map auto -f modern",
+    "build:ie11": "microbundle index.js -o dist/ie11.js --no-pkg-main --external none -f iife"
   },
   "dependencies": {
     "@eik/microbundle": "^0.2.10"
@@ -88,9 +88,10 @@ Libraries that are published to both eik and npm need should use this setup (thi
   "files": ["dist/"],
   "scripts": {
     "prebuild": "npx rimraf dist/** dist-eik/**",
-    "build": "npm run build:dist && npm run build:dist-eik",
+    "build": "npm run build:dist && npm run build:eik-esm && npm run build:eik-ie11",
     "build:dist": "microbundle src/index.ts -o ./dist/index.js -f cjs && microbundle src/index.ts -o ./dist/index.esm.js -f esm --no-pkg-main",
-    "build:dist-eik": "microbundle src/index.ts -o ./dist-eik/esm.js --no-pkg-main -f modern && microbundle src/index.ts -o ./dist-eik/ie11.js --no-pkg-main -f iife",
+    "build:eik-esm": "microbundle src/index.ts -o ./dist-eik/esm.js --no-pkg-main --import-map auto -f modern",
+    "build:eik-ie11": "microbundle src/index.ts -o ./dist-eik/ie11.js --no-pkg-main --external none -f iife"
     "publish:eik": "eik login -k $EIK_SERVER_KEY && eik publish"
   },
   "typings": "dist/index.d.ts",
