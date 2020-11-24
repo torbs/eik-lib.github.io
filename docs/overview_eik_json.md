@@ -1,5 +1,5 @@
 ---
-id: client_eik_json
+id: overview_eik_json
 title: The eik.json File
 sidebar_label: The eik.json File
 ---
@@ -23,7 +23,7 @@ Eik packaging is configured by way of a JSON meta file called `eik.json`. Any pr
 
 ## Generating an eik.json file
 
-The Eik client provides a scaffolding tool that can be used to generate an `eik.json` file in the current directory.
+The Eik [client](client.md) provides a scaffolding tool that can be used to generate an `eik.json` file in the current directory.
 
 ```sh
 eik init

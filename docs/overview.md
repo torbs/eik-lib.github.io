@@ -4,7 +4,7 @@ title: Overview
 sidebar_label: Overview
 ---
 
-Eik consist of 3 main parts. First of all Eik is an [asset server](/docs/server) for serving [ECMA Script Modules (ESM)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) and CSS assets. The second part of Eik is a [client](/docs/client) for easy upload and management of your assets to the Eik server. The third part is a set of mapping utils one can plug into build tools to map assets on the Eik server with each other.
+Eik consist of 3 main parts. First of all Eik is an [asset server](/docs/server) for serving [ECMA Script Modules (ESM)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) and CSS assets. Secondly, Eik is a [client](/docs/client) for easy upload and management of your assets to an Eik server. The third part is a set of utilities that can be used to align module dependencies to the same version.
 
 ## Introduction
 
@@ -12,11 +12,17 @@ To understand Eik we need to understand what we are trying to achieve so lets st
 
 In a moderate or large sized web site it is very common that the site is built and served as [multiple applications](https://martinfowler.com/articles/microservices.html) which live at different pathnames on the site. It's also common for each of these applications to have a dedicated team of developers with the goal of being as autonomous as possible. To achieve this, each application and team should depend on each other as little as possible.
 
-Lets say we have a site where the frontpage (`site.com`) is one application. Then we have a web shop, a second application, on `site.com/shop` and finally there is a third application handling checkout on `site.com/checkout`. 
+![User flow](/img/overview_page_to_page_flow.min.svg)
+
+Lets say we have a site where the front page (`site.com`) is one application. Then we have a web shop, a second application, on `site.com/shop` and finally there is a third application handling checkout on `site.com/checkout`. A user will normally arrive at the front page, move to browsing the shop and then finish at the checkout.
 
 Let's also say that all of these applications are using [lit-html](https://lit-html.polymer-project.org/) for templating in the browser. We then have different applications depending on the same library that we want to be developed and deployed to production autonomously. Problems can arise when some of these application start to depend on different versions of the same library.
 
+![Non-optimised loading of assets](/img/overview_page_to_page_diff_versions.min.svg)
+
 Our challenge is to avoid the end user having to end up downloading different versions of the same library as they move between the different applications on our site. We want to maximize end user performance by downloading lit-html once and not having to download one specific version when accessing `site.com` (eg. v1.2.0) and then downloading another specific version (eg. v1.1.1) when moving to `site.com/shop` and finally ending up with perhaps having to download yet another version (eg. v1.1.2) when they check out at `site.com/checkout`.
+
+![Optimised loading of assets](/img/overview_page_to_page_same_versions.min.svg)
 
 The Eik solution is to make all applications point to the same version of the same library in production despite that the applications are developed using different patch or minor version. If the library then has appropriate HTTP cache headers, the browser will do the rest and make sure the library is loaded over the wire only once during the user's visit to our site.
 

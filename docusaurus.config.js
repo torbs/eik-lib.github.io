@@ -32,6 +32,9 @@ module.exports = {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} - FINN.no.`,
     },
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+    },
   },
   presets: [
     [

@@ -29,13 +29,11 @@ Then an Import Map can be loaded as following in the browser:
 When the Import Map is applied, our code will act as we have written:
 
 ```js
-import {html, render} from 'lit-html';
-
 import * as lit from 'https://cdn.eik-server.com/npm/lit-html/v1/lit-html.js'
 ```
 
-## Choose a Strategy
+Browser support for Import Maps is currently (October 2020) limited. There are polyfills available for Import Maps but its fully possible to apply Import Map to modules ahead of time through build tools. 
 
-Browser support for Import Maps is currently (October 2020) limited. There are polyfills available for Import Maps and its fully possible to apply Import Map to modules ahead of time through build tools. Eik does not dictate which strategy, a polyfill or ahead of time, one uses to append Import Maps to modules but its advised that an organization aligns on the same strategy across its teams.
+Eik does not dictate which strategy, a polyfill or ahead of time, is used for import mapping modules but we recommend that an organization aligns itself with the same strategy across its teams.
 
 It is also worth keeping in mind that one is not locked to one strategy forever. An Import Map used to apply mapping ahead of time will work as intended in browsers the day there is full browser support for Import Maps.
