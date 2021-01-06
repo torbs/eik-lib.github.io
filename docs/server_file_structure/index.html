@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="generator" content="Docusaurus v2.0.0-alpha.f37987f32">
-<title data-react-helmet="true">Eik server - File structure | Eik</title><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_version" content="current"><meta data-react-helmet="true" name="docusaurus_tag" content="docs-default-current"><meta data-react-helmet="true" property="og:title" content="Eik server - File structure | Eik"><meta data-react-helmet="true" name="description" content="The EIK server stores files in the following structure:"><meta data-react-helmet="true" property="og:description" content="The EIK server stores files in the following structure:"><meta data-react-helmet="true" property="og:url" content="https://eik.dev/docs/server_file_structure"><link data-react-helmet="true" rel="shortcut icon" href="/img/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://eik.dev/docs/server_file_structure"><link rel="stylesheet" href="/styles.890df3ce.css">
+<meta name="generator" content="Docusaurus v2.0.0-alpha.70">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Eik Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Eik Blog Atom Feed"><title data-react-helmet="true">Eik server - File structure | Eik</title><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_version" content="current"><meta data-react-helmet="true" name="docusaurus_tag" content="docs-default-current"><meta data-react-helmet="true" property="og:title" content="Eik server - File structure | Eik"><meta data-react-helmet="true" name="description" content="The EIK server stores files in the following structure:"><meta data-react-helmet="true" property="og:description" content="The EIK server stores files in the following structure:"><meta data-react-helmet="true" property="og:url" content="https://eik.dev/docs/server_file_structure"><link data-react-helmet="true" rel="shortcut icon" href="/img/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://eik.dev/docs/server_file_structure"><link rel="stylesheet" href="/styles.74ca9b5f.css">
 <link rel="preload" href="/styles.ed79e917.js" as="script">
-<link rel="preload" href="/runtime~main.4bb0ef06.js" as="script">
-<link rel="preload" href="/main.14d2d8d5.js" as="script">
-<link rel="preload" href="/1.88c25bd8.js" as="script">
-<link rel="preload" href="/2.e93b49d6.js" as="script">
-<link rel="preload" href="/51.ba4129e3.js" as="script">
+<link rel="preload" href="/runtime~main.98829981.js" as="script">
+<link rel="preload" href="/main.4450777b.js" as="script">
+<link rel="preload" href="/1.ea8a33cf.js" as="script">
+<link rel="preload" href="/2.3bda66be.js" as="script">
+<link rel="preload" href="/51.f6258c98.js" as="script">
 <link rel="preload" href="/52.5e1943db.js" as="script">
 <link rel="preload" href="/935f2afb.e91533fe.js" as="script">
-<link rel="preload" href="/17896441.29a4d40a.js" as="script">
-<link rel="preload" href="/f09aea35.f6090ae6.js" as="script">
+<link rel="preload" href="/17896441.8ec0998b.js" as="script">
+<link rel="preload" href="/f09aea35.afc2ff6d.js" as="script">
 </head>
 <body>
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){var t=null;try{t=localStorage.getItem("theme")}catch(t){}return t}();t(null!==e?e:"light")}()</script><div id="__docusaurus">
@@ -25,16 +26,16 @@ arbitrary and is not changed during upload by the service.</p><p>The file struct
 import maps is strict and conforms to the version number it&#x27;s given with a <code>.json</code> extension.</p><p>The filename of import maps prior to uploading to the service can be anything. The service will
 convert the file name according to the parameters given when uploading it.</p><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_prK2" id="aliases"></a>Aliases<a class="hash-link" href="#aliases" title="Direct link to heading">#</a></h2><p>Packages, NPM packages and import map versions can be aliased. An alias is a semver major version of a
 full semver version and is a way to map a major version to a given full semver version of a
-package or import map.</p><p>This alias mapping is stored alongside the version of a package or import map version:</p><ul><li>Package alias path: <code>/:root/:org/pkg/:name/:major.alias.json</code></li><li>NPM package alias path: <code>/:root/:org/npm/:name/:major.alias.json</code></li><li>Import map alias path: <code>/:root/:org/map/:name/:major.alias.json</code></li></ul></div></article><div class="margin-vert--lg"><nav class="pagination-nav" aria-label="Blog list page navigation"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/server_rest_api"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">« Eik server - REST API</div></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/server_metrics"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Eik server - Metrics »</div></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_2xL- thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#packages" class="table-of-contents__link">Packages</a></li><li><a href="#npm-packages" class="table-of-contents__link">NPM Packages</a></li><li><a href="#import-maps" class="table-of-contents__link">Import Maps</a></li><li><a href="#aliases" class="table-of-contents__link">Aliases</a></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="text--center"><div>Copyright © 2020 - FINN.no.</div></div></div></footer></div>
+package or import map.</p><p>This alias mapping is stored alongside the version of a package or import map version:</p><ul><li>Package alias path: <code>/:root/:org/pkg/:name/:major.alias.json</code></li><li>NPM package alias path: <code>/:root/:org/npm/:name/:major.alias.json</code></li><li>Import map alias path: <code>/:root/:org/map/:name/:major.alias.json</code></li></ul></div></article><div class="margin-vert--lg"><nav class="pagination-nav" aria-label="Blog list page navigation"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/server_rest_api"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">« Eik server - REST API</div></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/server_metrics"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Eik server - Metrics »</div></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_2xL- thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#packages" class="table-of-contents__link">Packages</a></li><li><a href="#npm-packages" class="table-of-contents__link">NPM Packages</a></li><li><a href="#import-maps" class="table-of-contents__link">Import Maps</a></li><li><a href="#aliases" class="table-of-contents__link">Aliases</a></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2021 - FINN.no.</div></div></div></footer></div>
 <script src="/styles.ed79e917.js"></script>
-<script src="/runtime~main.4bb0ef06.js"></script>
-<script src="/main.14d2d8d5.js"></script>
-<script src="/1.88c25bd8.js"></script>
-<script src="/2.e93b49d6.js"></script>
-<script src="/51.ba4129e3.js"></script>
+<script src="/runtime~main.98829981.js"></script>
+<script src="/main.4450777b.js"></script>
+<script src="/1.ea8a33cf.js"></script>
+<script src="/2.3bda66be.js"></script>
+<script src="/51.f6258c98.js"></script>
 <script src="/52.5e1943db.js"></script>
 <script src="/935f2afb.e91533fe.js"></script>
-<script src="/17896441.29a4d40a.js"></script>
-<script src="/f09aea35.f6090ae6.js"></script>
+<script src="/17896441.8ec0998b.js"></script>
+<script src="/f09aea35.afc2ff6d.js"></script>
 </body>
 </html>
