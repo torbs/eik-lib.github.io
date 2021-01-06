@@ -93,7 +93,7 @@ And now `v4` will point to `4.17.19` instead of `4.17.18`
 
 ### Using an aliased version
 
-Creating import map aliases allows you to include the import map alias in your application's `eik.json` file without the need to update it every time you publish a new version of the import map.
+Creating import map aliases allows you to include the import map alias in your application's Eik config without the need to update it every time you publish a new version of the import map.
 
 ### Publishing an alias
 
